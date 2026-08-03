@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BIZAPRO HEX FINDER</title>
+    <style>
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0A0F1E;
+            font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            color: #E8F0FE;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1A3A5C;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2A5A7C;
+        }
+
+        /* ============================================
+           CONTAINER
+           ============================================ */
+        .app-container {
+            max-width: 520px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .header {
+            text-align: center;
+            padding: 24px 0 20px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #4DA3FF, transparent);
+            border-radius: 4px;
+        }
+
+        .header h1 {
+            font-size: 44px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #4DA3FF 0%, #7BC6FF 50%, #4DA3FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(77, 163, 255, 0.15);
+            margin-bottom: 4px;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 3px;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+
+        /* ============================================
+           GLASS CARD
+           ============================================ */
+        .glass-card {
+            background: linear-gradient(145deg, rgba(10, 20, 40, 0.85), rgba(5, 11, 25, 0.95));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(77, 163, 255, 0.08);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.6),
+                0 2px 8px rgba(77, 163, 255, 0.05),
+                inset 0 1px 0 rgba(77, 163, 255, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(77, 163, 255, 0.3), transparent);
+        }
+
+        .glass-card:hover {
+            box-shadow: 
+                0 12px 48px rgba(0, 0, 0, 0.8),
+                0 4px 16px rgba(77, 163, 255, 0.08),
+                inset 0 1px 0 rgba(77, 163, 255, 0.1);
+        }
+
+        .card-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(77, 163, 255, 0.6);
+            margin-bottom: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title .title-icon {
+            font-size: 14px;
+        }
+
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: rgba(26, 58, 92, 0.4);
+            color: #B0C8E8;
+            border: 1px solid rgba(77, 163, 255, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(77, 163, 255, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover::after {
+            opacity: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(77, 163, 255, 0.05);
+            border-color: rgba(77, 163, 255, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0px) scale(0.98);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4DA3FF, #3A8EFF);
+            color: #050B18;
+            border: none;
+            box-shadow: 0 4px 20px rgba(77, 163, 255, 0.25);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 8px 32px rgba(77, 163, 255, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary::after {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #00D9FF, #00B8D4);
+            color: #050B18;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 8px 32px rgba(0, 217, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(77, 163, 255, 0.2);
+            color: #7BC6FF;
+        }
+
+        .btn-outline:hover {
+            background: rgba(77, 163, 255, 0.08);
+            border-color: rgba(77, 163, 255, 0.4);
+        }
+
+        .btn-icon {
+            font-size: 18px;
+        }
+
+        /* ============================================
+           FILE INFO
+           ============================================ */
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            margin-top: 12px;
+            background: rgba(2, 8, 18, 0.6);
+            border-radius: 12px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            border: 1px solid rgba(77, 163, 255, 0.06);
+            transition: all 0.3s ease;
+            min-height: 40px;
+        }
+
+        .file-info.loaded {
+            color: #7BC6FF;
+            border-color: rgba(77, 163, 255, 0.15);
+            background: rgba(77, 163, 255, 0.05);
+        }
+
+        .file-info .info-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .file-info .info-text {
+            word-break: break-all;
+            flex: 1;
+        }
+
+        .file-info .info-badge {
+            background: rgba(77, 163, 255, 0.12);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            color: #4DA3FF;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           INPUTS
+           ============================================ */
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        .input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.3);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(2, 8, 18, 0.7);
+            border: 1px solid rgba(77, 163, 255, 0.08);
+            border-radius: 14px;
+            color: #E8F0FE;
+            font-size: 15px;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .input-field::placeholder {
+            color: rgba(255,255,255,0.15);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: rgba(77, 163, 255, 0.4);
+            box-shadow: 0 0 0 4px rgba(77, 163, 255, 0.05), inset 0 2px 8px rgba(0,0,0,0.2);
+            background: rgba(2, 8, 18, 0.9);
+        }
+
+        .input-field:focus::placeholder {
+            color: rgba(255,255,255,0.05);
+        }
+
+        textarea.input-field {
+            min-height: 60px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* ============================================
+           SEARCH BUTTON SPECIAL
+           ============================================ */
+        .search-btn-wrapper {
+            position: relative;
+        }
+
+        .btn-search {
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            background: linear-gradient(135deg, #4DA3FF, #2A7ACC);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 24px rgba(77, 163, 255, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-search::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-search:hover::before {
+            opacity: 1;
+        }
+
+        .btn-search:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(77, 163, 255, 0.35);
+        }
+
+        .btn-search:active {
+            transform: translateY(0px) scale(0.98);
+        }
+
+        .btn-search .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .btn-search.loading .spinner {
+            display: inline-block;
+        }
+        .btn-search.loading .search-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ============================================
+           RESULTS
+           ============================================ */
+        .results-wrapper {
+            background: rgba(2, 8, 18, 0.8);
+            border-radius: 14px;
+            border: 1px solid rgba(77, 163, 255, 0.06);
+            overflow: hidden;
+            box-shadow: inset 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(77, 163, 255, 0.06);
+            background: rgba(0,0,0,0.2);
+        }
+
+        .results-header .results-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(0, 217, 255, 0.6);
+        }
+
+        .results-header .results-count {
+            font-size: 12px;
+            color: rgba(255,255,255,0.3);
+            background: rgba(0, 217, 255, 0.06);
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .results-header .results-count.has-results {
+            color: #00D9FF;
+            background: rgba(0, 217, 255, 0.1);
+        }
+
+        .results-content {
+            padding: 16px 18px;
+            max-height: 380px;
+            overflow-y: auto;
+            font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+            font-size: 11px;
+            line-height: 1.7;
+            color: #00D9FF;
+            white-space: pre-wrap;
+            word-break: break-all;
+            min-height: 100px;
+        }
+
+        .results-content:empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.1);
+            font-size: 13px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .results-content:empty::before {
+            content: '🔍 No results yet. Load a UASSET and search for IDs.';
+            color: rgba(255,255,255,0.12);
+        }
+
+        .results-content .highlight {
+            color: #4DA3FF;
+        }
+
+        .results-content .match-number {
+            color: #00D9FF;
+            font-weight: 700;
+        }
+
+        .results-content .separator {
+            color: rgba(77, 163, 255, 0.2);
+        }
+
+        /* ============================================
+           ACTION BUTTONS (bottom)
+           ============================================ */
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .btn-action {
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(77, 163, 255, 0.06);
+            background: rgba(2, 8, 18, 0.4);
+            color: rgba(255,255,255,0.4);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-action:hover {
+            background: rgba(77, 163, 255, 0.06);
+            border-color: rgba(77, 163, 255, 0.15);
+            color: #B0C8E8;
+            transform: translateY(-1px);
+        }
+
+        .btn-action:active {
+            transform: scale(0.97);
+        }
+
+        .btn-action.active {
+            color: #7BC6FF;
+            border-color: rgba(77, 163, 255, 0.15);
+            background: rgba(77, 163, 255, 0.06);
+        }
+
+        /* ============================================
+           STATUS BAR
+           ============================================ */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 4px 4px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.15);
+        }
+
+        .status-bar .status-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            margin-right: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .status-bar .status-dot.active {
+            background: #4DA3FF;
+            box-shadow: 0 0 12px rgba(77, 163, 255, 0.3);
+        }
+
+        .status-bar .status-dot.success {
+            background: #00D9FF;
+            box-shadow: 0 0 12px rgba(0, 217, 255, 0.3);
+        }
+
+        .status-bar .status-text {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-bar .status-badge {
+            background: rgba(77, 163, 255, 0.06);
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-size: 10px;
+            color: rgba(255,255,255,0.2);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .status-bar .status-badge.has-skins {
+            color: #4DA3FF;
+            background: rgba(77, 163, 255, 0.08);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 480px) {
+            body { padding: 12px; }
+            
+            .header h1 { font-size: 36px; }
+            .header .subtitle { font-size: 12px; letter-spacing: 2px; }
+            
+            .glass-card { padding: 16px; border-radius: 16px; }
+            
+            .btn-grid { grid-template-columns: 1fr; }
+            .input-row { grid-template-columns: 1fr; }
+            .action-grid { grid-template-columns: 1fr; }
+            
+            .results-content { 
+                max-height: 280px;
+                font-size: 10px;
+                padding: 12px 14px;
+            }
+            
+            .btn { padding: 12px 14px; font-size: 13px; }
+            .btn-search { padding: 14px; font-size: 15px; }
+        }
+
+        @media (max-width: 380px) {
+            .header h1 { font-size: 30px; }
+            .glass-card { padding: 12px; }
+            .results-content { max-height: 220px; }
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glass-card {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .glass-card:nth-child(2) { animation-delay: 0.1s; }
+        .glass-card:nth-child(3) { animation-delay: 0.2s; }
+        .glass-card:nth-child(4) { animation-delay: 0.3s; }
+
+        /* ============================================
+           GLOW EFFECTS
+           ============================================ */
+        .glow-orbe {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glow-orbe-1 {
+            width: 300px;
+            height: 300px;
+            background: rgba(77, 163, 255, 0.04);
+            top: -100px;
+            right: -100px;
+        }
+
+        .glow-orbe-2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(0, 217, 255, 0.02);
+            bottom: -200px;
+            left: -200px;
+        }
+
+        /* ============================================
+           TOAST NOTIFICATION
+           ============================================ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(2, 8, 18, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 14px 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(77, 163, 255, 0.1);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+            color: #E8F0FE;
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 90%;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast .toast-icon {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Glow Orbes -->
+    <div class="glow-orbe glow-orbe-1"></div>
+    <div class="glow-orbe glow-orbe-2"></div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✅</span>
+        <span class="toast-message" id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <div class="app-container">
+        <!-- ===== HEADER ===== -->
+        <div class="header">
+            <h1>BIZAPRO</h1>
+            <p class="subtitle">Hex Finder · Premium</p>
+        </div>
+
+        <!-- ===== FILE CARD ===== -->
+        <div class="glass-card">
+            <div class="card-title">
+                <span class="title-icon">📁</span>
+                Files
+            </div>
+            <div class="btn-grid">
+                <button class="btn" id="openUassetBtn">
+                    <span class="btn-icon">📂</span>
+                    Open UASSET
+                </button>
+                <button class="btn" id="loadSkinsBtn">
+                    <span class="btn-icon">📜</span>
+                    Load Skins
+                </button>
+            </div>
+            <div class="file-info" id="fileInfo">
+                <span class="info-icon">📄</span>
+                <span class="info-text">No UASSET Loaded</span>
+            </div>
+            <div class="file-info" id="skinInfo">
+                <span class="info-icon">🗃️</span>
+                <span class="info-text">No Skin Database</span>
+            </div>
+        </div>
+
+        <!-- ===== SEARCH CARD ===== -->
+        <div class="glass-card">
+            <div class="card-title">
+                <span class="title-icon">🔍</span>
+                Search
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">Enter IDs (comma-separated)</label>
+                <textarea class="input-field" id="searchIds" placeholder="1407259, 1407990, 1408038">1407259,1407990</textarea>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label class="input-label">Hex Length</label>
+                    <input class="input-field" type="number" id="searchLength" value="12" min="1" max="64">
+                </div>
+                <div class="input-group search-btn-wrapper">
+                    <label class="input-label">&nbsp;</label>
+                    <button class="btn-search" id="findBtn">
+                        <span class="spinner"></span>
+                        <span class="search-text">🔍 Find All</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== RESULTS CARD ===== -->
+        <div class="glass-card">
+            <div class="card-title">
+                <span class="title-icon">📊</span>
+                Results
+            </div>
+            
+            <div class="results-wrapper">
+                <div class="results-header">
+                    <span class="results-title">Output</span>
+                    <span class="results-count" id="resultCount">0 found</span>
+                </div>
+                <div class="results-content" id="results"></div>
+            </div>
+
+            <div class="action-grid">
+                <button class="btn-action" id="copyBtn">
+                    📋 Copy All
+                </button>
+                <button class="btn-action" id="saveBtn">
+                    💾 Save TXT
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== STATUS BAR ===== -->
+        <div class="status-bar">
+            <span class="status-text">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">Ready</span>
+            </span>
+            <span class="status-badge" id="skinCount">Skins: 0</span>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // STATE
+        // ============================================
+        let uassetData = null;
+        let uassetName = '';
+        let skinDatabase = {};
+        let resultsText = '';
+        let lastResults = '';
+
+        // ============================================
+        // DOM REFS
+        // ============================================
+        const fileInfo = document.getElementById('fileInfo');
+        const skinInfo = document.getElementById('skinInfo');
+        const searchIds = document.getElementById('searchIds');
+        const searchLength = document.getElementById('searchLength');
+        const results = document.getElementById('results');
+        const resultCount = document.getElementById('resultCount');
+        const statusText = document.getElementById('statusText');
+        const statusDot = document.getElementById('statusDot');
+        const skinCount = document.getElementById('skinCount');
+        const findBtn = document.getElementById('findBtn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+
+        let toastTimeout = null;
+
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message, icon = '✅') {
+            toastMessage.textContent = message;
+            toast.querySelector('.toast-icon').textContent = icon;
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // ============================================
+        // STATUS
+        // ============================================
+        function setStatus(text, type = 'idle') {
+            statusText.textContent = text;
+            statusDot.className = 'status-dot';
+            if (type === 'active') statusDot.classList.add('active');
+            else if (type === 'success') statusDot.classList.add('success');
+        }
+
+        // ============================================
+        // FILE HANDLERS
+        // ============================================
+        document.getElementById('openUassetBtn').addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.uasset';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    uassetData = new Uint8Array(event.target.result);
+                    uassetName = file.name;
+                    fileInfo.classList.add('loaded');
+                    fileInfo.innerHTML = `
+                        <span class="info-icon">📄</span>
+                        <span class="info-text">${file.name}</span>
+                        <span class="info-badge">${(file.size / 1024).toFixed(1)} KB</span>
+                    `;
+                    setStatus('UASSET loaded', 'success');
+                    showToast(`Loaded: ${file.name}`, '📂');
+                };
+                reader.readAsArrayBuffer(file);
+            };
+            input.click();
+        });
+
+        document.getElementById('loadSkinsBtn').addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.txt';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const lines = event.target.result.split('\n');
+                    skinDatabase = {};
+                    for (const line of lines) {
+                        if (line.includes('|')) {
+                            const parts = line.split('|').map(s => s.trim());
+                            if (parts.length >= 5) {
+                                skinDatabase[parts[0]] = parts;
+                            }
+                        }
+                    }
+                    const count = Object.keys(skinDatabase).length;
+                    skinInfo.classList.add('loaded');
+                    skinInfo.innerHTML = `
+                        <span class="info-icon">🗃️</span>
+                        <span class="info-text">${count} skin entries loaded</span>
+                        <span class="info-badge">${count}</span>
+                    `;
+                    skinCount.textContent = `Skins: ${count}`;
+                    skinCount.classList.add('has-skins');
+                    setStatus('Database loaded', 'success');
+                    showToast(`Loaded ${count} skin entries`, '📜');
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        });
+
+        // ============================================
+        // HEX HELPERS
+        // ============================================
+        function hexBytes(data, start, length) {
+            const end = Math.min(start + length, data.length);
+            return Array.from(data.slice(start, end))
+                .map(b => b.toString(16).padStart(2, '0').toUpperCase())
+                .join(' ');
+        }
+
+        // ============================================
+        // SEARCH
+        // ============================================
+        document.getElementById('findBtn').addEventListener('click', async () => {
+            if (!uassetData) {
+                showToast('Please open a UASSET file first!', '⚠️');
+                return;
+            }
+
+            const ids = searchIds.value.split(',').map(s => s.trim()).filter(s => s);
+            if (ids.length === 0) {
+                showToast('Please enter at least one ID!', '⚠️');
+                return;
+            }
+
+            const length = parseInt(searchLength.value) || 12;
+
+            // Loading state
+            findBtn.classList.add('loading');
+            setStatus('Searching...', 'active');
+
+            // Simulate async (actually sync but we want UI update)
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            const data = uassetData;
+            let total = 0;
+            let output = '';
+
+            for (const id of ids) {
+                const idBytes = new TextEncoder().encode(id);
+                const foundPositions = [];
+                let pos = 0;
+
+                while (pos < data.length) {
+                    const found = data.indexOf(idBytes[0], pos);
+                    if (found === -1) break;
+
+                    let match = true;
+                    for (let i = 0; i < idBytes.length; i++) {
+                        if (found + i >= data.length || data[found + i] !== idBytes[i]) {
+                            match = false;
+                            break;
+                        }
+                    }
+
+                    if (match) {
+                        foundPositions.push(found);
+                        pos = found + 1;
+                    } else {
+                        pos = found + 1;
+                    }
+                }
+
+                if (foundPositions.length === 0) {
+                    output += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+                    output += `ID        : ${id}\n`;
+                    output += `STATUS    : NOT FOUND\n\n`;
+                    continue;
+                }
+
+                const skinInfo = skinDatabase[id] || ['', '', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN'];
+                output += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+                output += `SKIN NAME : ${skinInfo[2] || 'UNKNOWN'}\n`;
+                output += `ID        : ${id}\n`;
+                output += `TYPE      : ${skinInfo[3] || 'UNKNOWN'}\n`;
+                output += `RARITY    : ${skinInfo[4] || 'UNKNOWN'}\n\n`;
+                output += `TOTAL MATCHES : ${foundPositions.length}\n\n`;
+
+                for (let i = 0; i < foundPositions.length; i++) {
+                    const offset = foundPositions[i];
+                    const hex = hexBytes(data, offset, length);
+                    output += `▸ MATCH #${i + 1}\n`;
+                    output += `  OFFSET  : ${offset}\n`;
+                    output += `  HEX     : ${hex}\n\n`;
+                    total++;
+                }
+                output += '\n';
+            }
+
+            output += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+            output += `TOTAL FOUND : ${total}`;
+
+            results.textContent = output;
+            resultCount.textContent = `${total} found`;
+            resultCount.classList.toggle('has-results', total > 0);
+            resultsText = output;
+            lastResults = output;
+            setStatus(`Search complete — ${total} matches`, 'success');
+            showToast(`Found ${total} matches`, '🔍');
+
+            findBtn.classList.remove('loading');
+        });
+
+        // ============================================
+        // COPY
+        // ============================================
+        document.getElementById('copyBtn').addEventListener('click', () => {
+            if (!lastResults) {
+                showToast('No results to copy!', '⚠️');
+                return;
+            }
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(lastResults).then(() => {
+                    showToast('Copied to clipboard!', '📋');
+                    setStatus('Copied!', 'success');
+                }).catch(() => fallbackCopy());
+            } else {
+                fallbackCopy();
+            }
+        });
+
+        function fallbackCopy() {
+            const textarea = document.createElement('textarea');
+            textarea.value = lastResults;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast('Copied to clipboard!', '📋');
+                setStatus('Copied!', 'success');
+            } catch (e) {
+                showToast('Failed to copy', '❌');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // ============================================
+        // SAVE
+        // ============================================
+        document.getElementById('saveBtn').addEventListener('click', () => {
+            if (!lastResults) {
+                showToast('No results to save!', '⚠️');
+                return;
+            }
+
+            const blob = new Blob([lastResults], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `bizapro_${new Date().toISOString().slice(0,10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+            showToast('File saved!', '💾');
+            setStatus('Saved!', 'success');
+        });
+
+        // ============================================
+        // KEYBOARD SHORTCUTS
+        // ============================================
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                e.preventDefault();
+                document.getElementById('findBtn').click();
+            }
+        });
+
+        // ============================================
+        // INIT
+        // ============================================
+        setStatus('Ready', 'idle');
+        console.log('BIZAPRO HEX FINDER — Premium Edition');
+        console.log('📂 Open a UASSET file to begin');
+    </script>
+</body>
+</html>
