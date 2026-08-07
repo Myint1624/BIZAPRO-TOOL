@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BIZAPRO HEX FINDER</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>BIZAPRO · SKIN TOOL</title>
+
+    <!-- PWA META TAGS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="BIZAPRO Skin" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#05030f" />
+    <meta name="msapplication-TileColor" content="#05030f" />
+
+    <link id="manifestLink" rel="manifest" href="#" />
+
+    <!-- Icons: use bizapro.png -->
+    <link rel="shortcut icon" href="bizapro.png" type="image/png" />
+    <link rel="apple-touch-icon" href="bizapro.png" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
     <style>
-        /* ============================================
-           RESET & BASE
-           ============================================ */
+        /* ---------- GLOBAL RESET ---------- */
         * {
             margin: 0;
             padding: 0;
@@ -15,1100 +31,1960 @@
         }
 
         body {
-            background: #0A0F1E;
-            font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
             min-height: 100vh;
-            padding: 16px;
             display: flex;
+            align-items: center;
             justify-content: center;
-            align-items: flex-start;
-            color: #E8F0FE;
+            font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+            background: radial-gradient(ellipse at 20% 50%, #0d0b1e, #05030f 80%);
+            padding: 20px;
+            overscroll-behavior: none;
         }
 
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1A3A5C;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #2A5A7C;
-        }
-
-        /* ============================================
-           CONTAINER
-           ============================================ */
-        .app-container {
-            max-width: 520px;
+        .glass-container {
             width: 100%;
-            margin: 0 auto;
-        }
-
-        /* ============================================
-           HEADER
-           ============================================ */
-        .header {
-            text-align: center;
-            padding: 24px 0 20px;
+            max-width: 1280px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            padding: 40px 44px 48px;
+            transition: all 0.3s ease;
             position: relative;
         }
 
-        .header::after {
+        .glass-container::before {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #4DA3FF, transparent);
-            border-radius: 4px;
+            top: -1px;
+            left: 20%;
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            border-radius: 100%;
+            pointer-events: none;
         }
 
-        .header h1 {
-            font-size: 44px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            background: linear-gradient(135deg, #4DA3FF 0%, #7BC6FF 50%, #4DA3FF 100%);
+        /* ---------- HEADER ---------- */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+            gap: 16px 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand-icon {
+            font-size: 38px;
+            color: #fff;
+            filter: drop-shadow(0 0 20px rgba(120, 180, 255, 0.3));
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%,
+            100% {
+                filter: drop-shadow(0 0 20px rgba(120, 180, 255, 0.25));
+            }
+            50% {
+                filter: drop-shadow(0 0 40px rgba(120, 180, 255, 0.55));
+            }
+        }
+
+        .brand h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #f0f4ff, #b0caff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 40px rgba(77, 163, 255, 0.15);
-            margin-bottom: 4px;
+            text-shadow: 0 0 40px rgba(100, 150, 255, 0.15);
         }
 
-        .header .subtitle {
+        .brand .sub {
             font-size: 14px;
-            color: rgba(255,255,255,0.5);
-            letter-spacing: 3px;
-            font-weight: 300;
-            text-transform: uppercase;
-        }
-
-        /* ============================================
-           GLASS CARD
-           ============================================ */
-        .glass-card {
-            background: linear-gradient(145deg, rgba(10, 20, 40, 0.85), rgba(5, 11, 25, 0.95));
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 16px;
-            border: 1px solid rgba(77, 163, 255, 0.08);
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.6),
-                0 2px 8px rgba(77, 163, 255, 0.05),
-                inset 0 1px 0 rgba(77, 163, 255, 0.06);
-            transition: transform 0.2s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(77, 163, 255, 0.3), transparent);
-        }
-
-        .glass-card:hover {
-            box-shadow: 
-                0 12px 48px rgba(0, 0, 0, 0.8),
-                0 4px 16px rgba(77, 163, 255, 0.08),
-                inset 0 1px 0 rgba(77, 163, 255, 0.1);
-        }
-
-        .card-title {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: rgba(77, 163, 255, 0.6);
-            margin-bottom: 14px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .card-title .title-icon {
-            font-size: 14px;
-        }
-
-        /* ============================================
-           BUTTONS
-           ============================================ */
-        .btn-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 14px 18px;
-            border: none;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            background: rgba(26, 58, 92, 0.4);
-            color: #B0C8E8;
-            border: 1px solid rgba(77, 163, 255, 0.08);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 14px;
-            background: linear-gradient(135deg, rgba(77, 163, 255, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .btn:hover::after {
-            opacity: 1;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(77, 163, 255, 0.05);
-            border-color: rgba(77, 163, 255, 0.2);
-        }
-
-        .btn:active {
-            transform: translateY(0px) scale(0.98);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #4DA3FF, #3A8EFF);
-            color: #050B18;
-            border: none;
-            box-shadow: 0 4px 20px rgba(77, 163, 255, 0.25);
-            font-weight: 700;
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 8px 32px rgba(77, 163, 255, 0.35);
-            transform: translateY(-2px);
-        }
-
-        .btn-primary::after {
-            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #00D9FF, #00B8D4);
-            color: #050B18;
-            border: none;
-            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
-        }
-
-        .btn-success:hover {
-            box-shadow: 0 8px 32px rgba(0, 217, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid rgba(77, 163, 255, 0.2);
-            color: #7BC6FF;
-        }
-
-        .btn-outline:hover {
-            background: rgba(77, 163, 255, 0.08);
-            border-color: rgba(77, 163, 255, 0.4);
-        }
-
-        .btn-icon {
-            font-size: 18px;
-        }
-
-        /* ============================================
-           FILE INFO
-           ============================================ */
-        .file-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            margin-top: 12px;
-            background: rgba(2, 8, 18, 0.6);
-            border-radius: 12px;
-            font-size: 12px;
-            color: rgba(255,255,255,0.5);
-            border: 1px solid rgba(77, 163, 255, 0.06);
-            transition: all 0.3s ease;
-            min-height: 40px;
-        }
-
-        .file-info.loaded {
-            color: #7BC6FF;
-            border-color: rgba(77, 163, 255, 0.15);
-            background: rgba(77, 163, 255, 0.05);
-        }
-
-        .file-info .info-icon {
-            font-size: 16px;
-            flex-shrink: 0;
-        }
-
-        .file-info .info-text {
-            word-break: break-all;
-            flex: 1;
-        }
-
-        .file-info .info-badge {
-            background: rgba(77, 163, 255, 0.12);
-            padding: 2px 12px;
-            border-radius: 20px;
-            font-size: 10px;
-            color: #4DA3FF;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-
-        /* ============================================
-           INPUTS
-           ============================================ */
-        .input-group {
-            margin-bottom: 12px;
-        }
-
-        .input-group:last-child {
-            margin-bottom: 0;
-        }
-
-        .input-label {
-            display: block;
-            font-size: 11px;
-            text-transform: uppercase;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.35);
             letter-spacing: 1.5px;
-            color: rgba(255,255,255,0.3);
-            margin-bottom: 6px;
-            font-weight: 600;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px 14px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin-left: 6px;
         }
 
-        .input-field {
-            width: 100%;
-            padding: 14px 16px;
-            background: rgba(2, 8, 18, 0.7);
-            border: 1px solid rgba(77, 163, 255, 0.08);
-            border-radius: 14px;
-            color: #E8F0FE;
-            font-size: 15px;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        .input-field::placeholder {
-            color: rgba(255,255,255,0.15);
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: rgba(77, 163, 255, 0.4);
-            box-shadow: 0 0 0 4px rgba(77, 163, 255, 0.05), inset 0 2px 8px rgba(0,0,0,0.2);
-            background: rgba(2, 8, 18, 0.9);
-        }
-
-        .input-field:focus::placeholder {
-            color: rgba(255,255,255,0.05);
-        }
-
-        textarea.input-field {
-            min-height: 60px;
-            resize: vertical;
-            line-height: 1.5;
-        }
-
-        .input-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        /* ============================================
-           SEARCH BUTTON SPECIAL
-           ============================================ */
-        .search-btn-wrapper {
-            position: relative;
-        }
-
-        .btn-search {
-            width: 100%;
-            padding: 16px;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 700;
-            border: none;
-            background: linear-gradient(135deg, #4DA3FF, #2A7ACC);
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 24px rgba(77, 163, 255, 0.25);
+        .status-badge {
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 12px;
-            position: relative;
-            overflow: hidden;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
         }
 
-        .btn-search::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .btn-search:hover::before {
-            opacity: 1;
-        }
-
-        .btn-search:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 40px rgba(77, 163, 255, 0.35);
-        }
-
-        .btn-search:active {
-            transform: translateY(0px) scale(0.98);
-        }
-
-        .btn-search .spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255,255,255,0.2);
-            border-top: 2px solid white;
+        .status-dot {
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            background: #4ade80;
+            box-shadow: 0 0 16px rgba(74, 222, 128, 0.4);
+            animation: dotPulse 2s ease-in-out infinite;
         }
 
-        .btn-search.loading .spinner {
-            display: inline-block;
-        }
-        .btn-search.loading .search-text {
-            display: none;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* ============================================
-           RESULTS
-           ============================================ */
-        .results-wrapper {
-            background: rgba(2, 8, 18, 0.8);
-            border-radius: 14px;
-            border: 1px solid rgba(77, 163, 255, 0.06);
-            overflow: hidden;
-            box-shadow: inset 0 2px 20px rgba(0,0,0,0.3);
+        @keyframes dotPulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(0.85);
+            }
         }
 
-        .results-header {
+        /* ---------- BUTTON ROW ---------- */
+        .actions {
             display: flex;
-            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px 16px;
+            margin-bottom: 28px;
             align-items: center;
-            padding: 14px 18px;
-            border-bottom: 1px solid rgba(77, 163, 255, 0.06);
-            background: rgba(0,0,0,0.2);
         }
 
-        .results-header .results-title {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: rgba(0, 217, 255, 0.6);
-        }
-
-        .results-header .results-count {
-            font-size: 12px;
-            color: rgba(255,255,255,0.3);
-            background: rgba(0, 217, 255, 0.06);
-            padding: 2px 14px;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-
-        .results-header .results-count.has-results {
-            color: #00D9FF;
-            background: rgba(0, 217, 255, 0.1);
-        }
-
-        .results-content {
-            padding: 16px 18px;
-            max-height: 380px;
-            overflow-y: auto;
-            font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
-            font-size: 11px;
-            line-height: 1.7;
-            color: #00D9FF;
-            white-space: pre-wrap;
-            word-break: break-all;
-            min-height: 100px;
-        }
-
-        .results-content:empty {
-            display: flex;
+        .glass-btn {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            color: rgba(255,255,255,0.1);
-            font-size: 13px;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        .results-content:empty::before {
-            content: '🔍 No results yet. Load a UASSET and search for IDs.';
-            color: rgba(255,255,255,0.12);
-        }
-
-        .results-content .highlight {
-            color: #4DA3FF;
-        }
-
-        .results-content .match-number {
-            color: #00D9FF;
-            font-weight: 700;
-        }
-
-        .results-content .separator {
-            color: rgba(77, 163, 255, 0.2);
-        }
-
-        /* ============================================
-           ACTION BUTTONS (bottom)
-           ============================================ */
-        .action-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
             gap: 10px;
-            margin-top: 12px;
-        }
-
-        .btn-action {
-            padding: 12px;
-            border-radius: 12px;
-            border: 1px solid rgba(77, 163, 255, 0.06);
-            background: rgba(2, 8, 18, 0.4);
-            color: rgba(255,255,255,0.4);
-            font-size: 13px;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-size: 14px;
             font-weight: 500;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            color: rgba(255, 255, 255, 0.85);
             cursor: pointer;
             transition: all 0.25s ease;
-            display: flex;
+            font-family: inherit;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        .glass-btn i {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        .glass-btn:active {
+            transform: translateY(0px) scale(0.98);
+        }
+
+        .glass-btn.primary {
+            background: rgba(255, 255, 255, 0.10);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .glass-btn.primary i {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .glass-btn.primary:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .shortcut-hint {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 1px 8px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            margin-left: 2px;
+            font-family: monospace;
+            transition: opacity 0.3s ease;
+        }
+
+        .glass-btn:hover .shortcut-hint {
+            color: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .file-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+            padding: 6px 16px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 8px;
-        }
-
-        .btn-action:hover {
-            background: rgba(77, 163, 255, 0.06);
-            border-color: rgba(77, 163, 255, 0.15);
-            color: #B0C8E8;
-            transform: translateY(-1px);
-        }
-
-        .btn-action:active {
-            transform: scale(0.97);
-        }
-
-        .btn-action.active {
-            color: #7BC6FF;
-            border-color: rgba(77, 163, 255, 0.15);
-            background: rgba(77, 163, 255, 0.06);
-        }
-
-        /* ============================================
-           STATUS BAR
-           ============================================ */
-        .status-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 4px 4px;
-            font-size: 12px;
-            color: rgba(255,255,255,0.15);
-        }
-
-        .status-bar .status-dot {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            margin-right: 8px;
+            max-width: 280px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
             transition: all 0.3s ease;
         }
 
-        .status-bar .status-dot.active {
-            background: #4DA3FF;
-            box-shadow: 0 0 12px rgba(77, 163, 255, 0.3);
+        .file-label i {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.2);
         }
 
-        .status-bar .status-dot.success {
-            background: #00D9FF;
-            box-shadow: 0 0 12px rgba(0, 217, 255, 0.3);
+        .file-label.loaded {
+            border-color: rgba(74, 222, 128, 0.2);
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        .status-bar .status-text {
+        .file-label.loaded i {
+            color: #4ade80;
+        }
+
+        .hidden-input {
+            display: none;
+        }
+
+        /* ---------- SEARCH BAR ---------- */
+        .search-section {
+            margin-bottom: 28px;
+        }
+
+        .search-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 60px;
+            padding: 4px 4px 4px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: border-color 0.3s ease;
+        }
+
+        .search-row:focus-within {
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 40px rgba(100, 150, 255, 0.04);
+        }
+
+        .search-row label {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .status-bar .status-badge {
-            background: rgba(77, 163, 255, 0.06);
-            padding: 2px 14px;
-            border-radius: 20px;
-            font-size: 10px;
-            color: rgba(255,255,255,0.2);
-            font-weight: 600;
-            letter-spacing: 0.5px;
+        .search-row label .shortcut-hint {
+            font-size: 9px;
+            padding: 0 6px;
         }
 
-        .status-bar .status-badge.has-skins {
-            color: #4DA3FF;
-            background: rgba(77, 163, 255, 0.08);
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            background: transparent;
+            border: none;
+            padding: 14px 0;
+            font-size: 15px;
+            color: #fff;
+            font-family: inherit;
+            outline: none;
         }
 
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
-        @media (max-width: 480px) {
-            body { padding: 12px; }
-            
-            .header h1 { font-size: 36px; }
-            .header .subtitle { font-size: 12px; letter-spacing: 2px; }
-            
-            .glass-card { padding: 16px; border-radius: 16px; }
-            
-            .btn-grid { grid-template-columns: 1fr; }
-            .input-row { grid-template-columns: 1fr; }
-            .action-grid { grid-template-columns: 1fr; }
-            
-            .results-content { 
-                max-height: 280px;
-                font-size: 10px;
-                padding: 12px 14px;
-            }
-            
-            .btn { padding: 12px 14px; font-size: 13px; }
-            .btn-search { padding: 14px; font-size: 15px; }
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+            font-weight: 300;
+            letter-spacing: 0.2px;
         }
 
-        @media (max-width: 380px) {
-            .header h1 { font-size: 30px; }
-            .glass-card { padding: 12px; }
-            .results-content { max-height: 220px; }
-        }
-
-        /* ============================================
-           ANIMATIONS
-           ============================================ */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .glass-card {
-            animation: fadeInUp 0.5s ease forwards;
-        }
-
-        .glass-card:nth-child(2) { animation-delay: 0.1s; }
-        .glass-card:nth-child(3) { animation-delay: 0.2s; }
-        .glass-card:nth-child(4) { animation-delay: 0.3s; }
-
-        /* ============================================
-           GLOW EFFECTS
-           ============================================ */
-        .glow-orbe {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .glow-orbe-1 {
-            width: 300px;
-            height: 300px;
-            background: rgba(77, 163, 255, 0.04);
-            top: -100px;
-            right: -100px;
-        }
-
-        .glow-orbe-2 {
-            width: 400px;
-            height: 400px;
-            background: rgba(0, 217, 255, 0.02);
-            bottom: -200px;
-            left: -200px;
-        }
-
-        /* ============================================
-           TOAST NOTIFICATION
-           ============================================ */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: rgba(2, 8, 18, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 14px 24px;
-            border-radius: 16px;
-            border: 1px solid rgba(77, 163, 255, 0.1);
-            box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-            color: #E8F0FE;
+        .search-btn {
+            padding: 12px 34px;
+            border-radius: 60px;
+            border: none;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #fff;
             font-size: 14px;
             font-weight: 500;
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            z-index: 999;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.3px;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        .search-btn i {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-btn:active {
+            transform: scale(0.97);
+        }
+
+        .search-btn .shortcut-hint {
+            font-size: 9px;
+        }
+
+        /* ---------- INSTALL BANNER & HELP ---------- */
+        .install-banner {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 60px;
+            padding: 10px 16px 10px 24px;
+            margin-bottom: 20px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .install-banner.show {
+            display: flex;
+        }
+
+        .install-banner .msg {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .install-banner .msg i {
+            color: rgba(120, 180, 255, 0.5);
+            font-size: 18px;
+        }
+
+        .install-banner .actions {
+            margin: 0;
+            gap: 8px;
+        }
+
+        .install-banner .glass-btn {
+            padding: 8px 20px;
+            font-size: 13px;
+        }
+
+        .install-banner .glass-btn i {
+            font-size: 14px;
+        }
+
+        .install-guide-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.4);
+            padding: 8px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.25s ease;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .install-guide-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ---------- HTTPS WARNING ---------- */
+        .https-warning {
+            display: none;
+            background: rgba(248, 113, 113, 0.08);
+            border: 1px solid rgba(248, 113, 113, 0.15);
+            border-radius: 16px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            color: rgba(255, 200, 200, 0.7);
+            font-size: 13px;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .https-warning.show {
+            display: flex;
+        }
+
+        .https-warning i {
+            color: #f87171;
+            font-size: 18px;
+        }
+
+        .https-warning code {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ---------- INSTALL GUIDE OVERLAY ---------- */
+        .guide-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 24px;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .guide-overlay.active {
+            display: flex;
+        }
+
+        .guide-panel {
+            background: rgba(20, 18, 40, 0.95);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 40px 48px 44px;
+            max-width: 540px;
+            width: 100%;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .guide-panel h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+
+        .guide-panel .sub {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 13px;
+            margin-bottom: 24px;
+        }
+
+        .guide-step {
+            display: flex;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            align-items: flex-start;
+        }
+
+        .guide-step .num {
+            min-width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(120, 180, 255, 0.1);
+            color: rgba(120, 180, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .guide-step .text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .guide-step .text strong {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .guide-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 22px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            font-family: inherit;
+        }
+
+        .guide-close:hover {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .guide-status {
+            margin-top: 20px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 13px;
+        }
+
+        .guide-status .ok {
+            color: #4ade80;
+        }
+        .guide-status .fail {
+            color: #f87171;
+        }
+
+        /* ---------- RESULT BOX ---------- */
+        .result-wrapper {
+            position: relative;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 6px;
+            margin-bottom: 24px;
+            box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-box {
+            width: 100%;
+            height: 340px;
+            border-radius: 24px;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 20px 24px;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 13.5px;
+            line-height: 1.7;
+            overflow-y: auto;
+            border: none;
+            resize: none;
+            outline: none;
+            scroll-behavior: smooth;
+            white-space: pre-wrap;
+            word-break: break-all;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .result-box::-webkit-scrollbar {
+            width: 6px;
+        }
+        .result-box::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+        }
+        .result-box::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+        }
+        .result-box::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .result-placeholder {
+            color: rgba(255, 255, 255, 0.15);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-size: 15px;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .result-placeholder i {
+            font-size: 32px;
+            opacity: 0.2;
+        }
+
+        .result-line {
+            display: block;
+            padding: 2px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .result-line .highlight {
+            color: #7aaaff;
+        }
+
+        /* ---------- BOTTOM TOOLBAR ---------- */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px 20px;
+        }
+
+        .toolbar-left {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 14px;
+            align-items: center;
+        }
+
+        .toolbar-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 450;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        .toolbar-btn i {
+            font-size: 14px;
+        }
+
+        .toolbar-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .toolbar-btn:active {
+            transform: scale(0.96);
+        }
+
+        .toolbar-btn .shortcut-hint {
+            font-size: 9px;
+            padding: 0 6px;
+        }
+
+        .toolbar-right {
             display: flex;
             align-items: center;
             gap: 12px;
-            max-width: 90%;
         }
 
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
+        .skin-count {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.2);
+            padding: 6px 16px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
 
-        .toast .toast-icon {
-            font-size: 20px;
+        .shortcuts-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.25);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-size: 16px;
+            font-family: inherit;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        .shortcuts-toggle:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.6);
+            border-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .shortcuts-toggle:active {
+            transform: scale(0.92);
+        }
+
+        /* ---------- SHORTCUTS HELP OVERLAY ---------- */
+        .shortcuts-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 24px;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .shortcuts-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .shortcuts-panel {
+            background: rgba(20, 18, 40, 0.9);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 40px 48px 44px;
+            max-width: 560px;
+            width: 100%;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
+            position: relative;
+        }
+
+        .shortcuts-panel h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+
+        .shortcuts-panel .sub {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+
+        .shortcuts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 24px;
+        }
+
+        .shortcut-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .shortcut-item .action {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .shortcut-item .keys {
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 12px;
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 2px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            letter-spacing: 0.3px;
+        }
+
+        .shortcuts-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 22px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            font-family: inherit;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .shortcuts-close:hover {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 768px) {
+            .glass-container {
+                padding: 24px 18px 32px;
+                border-radius: 32px;
+            }
+            .brand h1 {
+                font-size: 26px;
+            }
+            .brand .sub {
+                font-size: 11px;
+                padding: 2px 10px;
+            }
+            .brand-icon {
+                font-size: 28px;
+            }
+            .search-row {
+                padding: 4px 4px 4px 16px;
+                border-radius: 40px;
+            }
+            .search-input {
+                font-size: 14px;
+                padding: 12px 0;
+                min-width: 140px;
+            }
+            .search-btn {
+                padding: 10px 22px;
+                font-size: 13px;
+            }
+            .result-box {
+                height: 240px;
+                font-size: 12px;
+                padding: 14px 16px;
+            }
+            .glass-btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+            .toolbar-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+            .file-label {
+                max-width: 160px;
+                font-size: 12px;
+            }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .status-badge {
+                align-self: flex-start;
+            }
+            .shortcuts-grid {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+            .shortcuts-panel {
+                padding: 28px 22px 32px;
+            }
+            .shortcut-hint {
+                display: none;
+            }
+            .install-banner .msg {
+                font-size: 12px;
+            }
+            .install-banner .glass-btn {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+            .https-warning {
+                font-size: 12px;
+                padding: 10px 16px;
+            }
+            .guide-panel {
+                padding: 28px 22px 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .glass-container {
+                padding: 16px 12px 24px;
+                border-radius: 24px;
+            }
+            .brand h1 {
+                font-size: 22px;
+            }
+            .actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            .glass-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .search-row {
+                flex-wrap: wrap;
+                background: transparent;
+                border: none;
+                padding: 0;
+                gap: 8px;
+            }
+            .search-row label {
+                display: none;
+            }
+            .search-input {
+                width: 100%;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                border-radius: 40px;
+                padding: 12px 18px;
+            }
+            .search-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .result-box {
+                height: 200px;
+                font-size: 11px;
+                padding: 12px 14px;
+            }
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .toolbar-left {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .skin-count {
+                text-align: center;
+            }
+            .shortcuts-panel {
+                padding: 20px 16px 24px;
+            }
+            .shortcuts-panel h2 {
+                font-size: 18px;
+            }
+            .install-banner {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                padding: 14px 16px;
+                border-radius: 28px;
+            }
+            .install-banner .msg {
+                justify-content: center;
+            }
+            .install-banner .actions {
+                justify-content: center;
+            }
+            .https-warning {
+                flex-direction: column;
+                text-align: center;
+                gap: 6px;
+            }
+            .guide-panel {
+                padding: 20px 16px 24px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Glow Orbes -->
-    <div class="glow-orbe glow-orbe-1"></div>
-    <div class="glow-orbe glow-orbe-2"></div>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <span class="toast-icon">✅</span>
-        <span class="toast-message" id="toastMessage">Copied to clipboard!</span>
+    <div class="glass-container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="brand">
+                <span class="brand-icon"><i class="fa-brands fa-d-and-d"></i></span>
+                <h1>BIZAPRO SKIN TOOL</h1>
+                <span class="sub">Finder</span>
+            </div>
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span id="statusText">ready</span>
+            </div>
+        </div>
+
+        <!-- HTTPS WARNING -->
+        <div class="https-warning" id="httpsWarning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>
+                <strong>HTTPS required for automatic installation.</strong>
+                Serve over HTTPS or localhost. <span style="opacity:0.4;margin-left:8px;">(or use <code>npx serve</code>)</span>
+            </span>
+        </div>
+
+        <!-- INSTALL BANNER -->
+        <div class="install-banner" id="installBanner">
+            <span class="msg">
+                <i class="fas fa-mobile-alt"></i>
+                Install BIZAPRO Skin Tool on your device
+            </span>
+            <div class="actions">
+                <button class="glass-btn primary" id="installBtn">
+                    <i class="fas fa-download"></i> INSTALL
+                </button>
+                <button class="glass-btn" id="dismissInstallBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+                <button class="install-guide-btn" id="guideBtn">
+                    <i class="fas fa-question-circle"></i> Help
+                </button>
+            </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="actions">
+            <button class="glass-btn primary" id="openBtn">
+                <i class="fas fa-folder-open"></i> OPEN UASSET
+                <span class="shortcut-hint">⌘O</span>
+            </button>
+            <button class="glass-btn" id="loadSkinsBtn">
+                <i class="fas fa-list-ul"></i> LOAD SKINS.TXT
+                <span class="shortcut-hint">⇧⌘L</span>
+            </button>
+            <span class="file-label" id="fileLabel">
+                <i class="fas fa-file"></i> No file
+            </span>
+            <span class="file-label" id="skinLabel">
+                <i class="fas fa-database"></i> 0 skins
+            </span>
+        </div>
+
+        <input type="file" id="uassetInput" class="hidden-input" accept=".uasset" />
+        <input type="file" id="skinsInput" class="hidden-input" accept=".txt" />
+
+        <!-- SEARCH -->
+        <div class="search-section">
+            <div class="search-row">
+                <label for="searchInput">
+                    <i class="fas fa-search"></i> ID / Name
+                    <span class="shortcut-hint">⌘F</span>
+                </label>
+                <input
+                type="text"
+                class="search-input"
+                id="searchInput"
+                placeholder="e.g. 1407259, Druvaen, X-Suit"
+                autocomplete="off"
+                inputmode="text"
+                />
+                <button class="search-btn" id="findBtn">
+                    <i class="fas fa-arrow-right"></i> FIND
+                    <span class="shortcut-hint">↵</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- RESULT -->
+        <div class="result-wrapper">
+            <div class="result-box" id="resultBox">
+                <div class="result-placeholder" id="placeholder">
+                    <i class="fas fa-search"></i>
+                    <span>Open a .uasset file &amp; load skins.txt</span>
+                    <span style="font-size:12px;opacity:0.4;">— results appear here —</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOOLBAR -->
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <button class="toolbar-btn" id="copyBtn">
+                    <i class="fas fa-copy"></i> COPY
+                    <span class="shortcut-hint">⇧⌘C</span>
+                </button>
+                <button class="toolbar-btn" id="saveBtn">
+                    <i class="fas fa-save"></i> SAVE TXT
+                    <span class="shortcut-hint">⇧⌘S</span>
+                </button>
+                <button class="toolbar-btn" id="clearBtn">
+                    <i class="fas fa-eraser"></i> CLEAR
+                    <span class="shortcut-hint">ESC</span>
+                </button>
+            </div>
+            <div class="toolbar-right">
+                <span class="skin-count" id="resultCount">0 results</span>
+                <button class="shortcuts-toggle" id="shortcutsToggle" title="Keyboard shortcuts (?)">
+                    <i class="fas fa-keyboard"></i>
+                </button>
+            </div>
+        </div>
+
     </div>
 
-    <div class="app-container">
-        <!-- ===== HEADER ===== -->
-        <div class="header">
-            <h1>BIZAPRO</h1>
-            <p class="subtitle">Hex Finder · Premium</p>
-        </div>
+    <!-- INSTALL GUIDE OVERLAY -->
+    <div class="guide-overlay" id="guideOverlay">
+        <div class="guide-panel">
+            <button class="guide-close" id="guideClose">&times;</button>
+            <h2>📲 How to Install</h2>
+            <p class="sub">Follow these steps to add BIZAPRO Skin Tool to your home screen</p>
 
-        <!-- ===== FILE CARD ===== -->
-        <div class="glass-card">
-            <div class="card-title">
-                <span class="title-icon">📁</span>
-                Files
+            <div class="guide-step">
+                <span class="num">1</span>
+                <div class="text"><strong>Android / Chrome:</strong> Tap the <strong>INSTALL</strong> button above (if visible) or use the browser menu <i class="fas fa-ellipsis-v" style="opacity:0.5;"></i> → <strong>"Add to Home screen"</strong>.</div>
             </div>
-            <div class="btn-grid">
-                <button class="btn" id="openUassetBtn">
-                    <span class="btn-icon">📂</span>
-                    Open UASSET
-                </button>
-                <button class="btn" id="loadSkinsBtn">
-                    <span class="btn-icon">📜</span>
-                    Load Skins
-                </button>
+            <div class="guide-step">
+                <span class="num">2</span>
+                <div class="text"><strong>iOS / Safari:</strong> Tap the share icon <i class="fas fa-square-arrow-up" style="opacity:0.5;"></i> → <strong>"Add to Home Screen"</strong>.</div>
             </div>
-            <div class="file-info" id="fileInfo">
-                <span class="info-icon">📄</span>
-                <span class="info-text">No UASSET Loaded</span>
+            <div class="guide-step">
+                <span class="num">3</span>
+                <div class="text"><strong>Desktop (Chrome/Edge):</strong> Click the install icon in the address bar or use the <strong>INSTALL</strong> button above.</div>
             </div>
-            <div class="file-info" id="skinInfo">
-                <span class="info-icon">🗃️</span>
-                <span class="info-text">No Skin Database</span>
+            <div class="guide-step">
+                <span class="num">4</span>
+                <div class="text">If you don't see the option, ensure you're on <strong>HTTPS or localhost</strong>. Try <code style="background:rgba(255,255,255,0.05);padding:2px 8px;border-radius:4px;">npx serve</code> to serve this folder.</div>
+            </div>
+
+            <div class="guide-status" id="guideStatus">
+                <i class="fas fa-circle-info"></i> Checking installation readiness...
             </div>
         </div>
+    </div>
 
-        <!-- ===== SEARCH CARD ===== -->
-        <div class="glass-card">
-            <div class="card-title">
-                <span class="title-icon">🔍</span>
-                Search
+    <!-- SHORTCUTS HELP OVERLAY -->
+    <div class="shortcuts-overlay" id="shortcutsOverlay">
+        <div class="shortcuts-panel">
+            <button class="shortcuts-close" id="shortcutsClose">&times;</button>
+            <h2>⌨️ Keyboard Shortcuts</h2>
+            <p class="sub">Quick actions for faster workflow</p>
+            <div class="shortcuts-grid">
+                <div class="shortcut-item"><span class="action">Open .uasset</span><span class="keys">⌘O</span></div>
+                <div class="shortcut-item"><span class="action">Load skins.txt</span><span class="keys">⇧⌘L</span></div>
+                <div class="shortcut-item"><span class="action">Focus search</span><span class="keys">⌘F</span></div>
+                <div class="shortcut-item"><span class="action">Find / search</span><span class="keys">↵</span></div>
+                <div class="shortcut-item"><span class="action">Copy results</span><span class="keys">⇧⌘C</span></div>
+                <div class="shortcut-item"><span class="action">Save results</span><span class="keys">⇧⌘S</span></div>
+                <div class="shortcut-item"><span class="action">Clear search / reset</span><span class="keys">ESC</span></div>
+                <div class="shortcut-item"><span class="action">Toggle shortcuts help</span><span class="keys">?</span></div>
             </div>
-            
-            <div class="input-group">
-                <label class="input-label">Enter IDs (comma-separated)</label>
-                <textarea class="input-field" id="searchIds" placeholder="1407259, 1407990, 1408038">1407259,1407990</textarea>
+            <div style="margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;align-items:center;">
+                <span style="color:rgba(255,255,255,0.15);font-size:12px;">BIZAPRO · SKIN TOOL</span>
+                <span style="color:rgba(255,255,255,0.08);font-size:11px;font-family:monospace;">v2.4 · PWA</span>
             </div>
-
-            <div class="input-row">
-                <div class="input-group">
-                    <label class="input-label">Hex Length</label>
-                    <input class="input-field" type="number" id="searchLength" value="12" min="1" max="64">
-                </div>
-                <div class="input-group search-btn-wrapper">
-                    <label class="input-label">&nbsp;</label>
-                    <button class="btn-search" id="findBtn">
-                        <span class="spinner"></span>
-                        <span class="search-text">🔍 Find All</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===== RESULTS CARD ===== -->
-        <div class="glass-card">
-            <div class="card-title">
-                <span class="title-icon">📊</span>
-                Results
-            </div>
-            
-            <div class="results-wrapper">
-                <div class="results-header">
-                    <span class="results-title">Output</span>
-                    <span class="results-count" id="resultCount">0 found</span>
-                </div>
-                <div class="results-content" id="results"></div>
-            </div>
-
-            <div class="action-grid">
-                <button class="btn-action" id="copyBtn">
-                    📋 Copy All
-                </button>
-                <button class="btn-action" id="saveBtn">
-                    💾 Save TXT
-                </button>
-            </div>
-        </div>
-
-        <!-- ===== STATUS BAR ===== -->
-        <div class="status-bar">
-            <span class="status-text">
-                <span class="status-dot" id="statusDot"></span>
-                <span id="statusText">Ready</span>
-            </span>
-            <span class="status-badge" id="skinCount">Skins: 0</span>
         </div>
     </div>
 
     <script>
-        // ============================================
-        // STATE
-        // ============================================
-        let uassetData = null;
-        let uassetName = '';
-        let skinDatabase = {};
-        let resultsText = '';
-        let lastResults = '';
+        // ================================================================
+        //  BIZAPRO · GLASS FINDER  –  INSTALL HELP + DIAGNOSTICS
+        //  Uses bizapro.png for icons, auto-loads Item.uasset & skin.txt
+        // ================================================================
 
-        // ============================================
-        // DOM REFS
-        // ============================================
-        const fileInfo = document.getElementById('fileInfo');
-        const skinInfo = document.getElementById('skinInfo');
-        const searchIds = document.getElementById('searchIds');
-        const searchLength = document.getElementById('searchLength');
-        const results = document.getElementById('results');
-        const resultCount = document.getElementById('resultCount');
-        const statusText = document.getElementById('statusText');
-        const statusDot = document.getElementById('statusDot');
-        const skinCount = document.getElementById('skinCount');
-        const findBtn = document.getElementById('findBtn');
-        const toast = document.getElementById('toast');
-        const toastMessage = document.getElementById('toastMessage');
+        (function() {
+            'use strict';
 
-        let toastTimeout = null;
+            // ----- DOM refs -----
+            const openBtn = document.getElementById('openBtn');
+            const loadSkinsBtn = document.getElementById('loadSkinsBtn');
+            const uassetInput = document.getElementById('uassetInput');
+            const skinsInput = document.getElementById('skinsInput');
+            const fileLabel = document.getElementById('fileLabel');
+            const skinLabel = document.getElementById('skinLabel');
+            const searchInput = document.getElementById('searchInput');
+            const findBtn = document.getElementById('findBtn');
+            const resultBox = document.getElementById('resultBox');
+            const placeholder = document.getElementById('placeholder');
+            const copyBtn = document.getElementById('copyBtn');
+            const saveBtn = document.getElementById('saveBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const resultCount = document.getElementById('resultCount');
+            const statusText = document.getElementById('statusText');
+            const shortcutsToggle = document.getElementById('shortcutsToggle');
+            const shortcutsOverlay = document.getElementById('shortcutsOverlay');
+            const shortcutsClose = document.getElementById('shortcutsClose');
+            const installBanner = document.getElementById('installBanner');
+            const installBtn = document.getElementById('installBtn');
+            const dismissInstallBtn = document.getElementById('dismissInstallBtn');
+            const httpsWarning = document.getElementById('httpsWarning');
+            const guideBtn = document.getElementById('guideBtn');
+            const guideOverlay = document.getElementById('guideOverlay');
+            const guideClose = document.getElementById('guideClose');
+            const guideStatus = document.getElementById('guideStatus');
 
-        // ============================================
-        // TOAST
-        // ============================================
-        function showToast(message, icon = '✅') {
-            toastMessage.textContent = message;
-            toast.querySelector('.toast-icon').textContent = icon;
-            toast.classList.add('show');
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2500);
-        }
+            // ----- state -----
+            let fileData = null;
+            let skinDB = {};
+            let fileLoaded = false;
+            let skinsLoaded = false;
+            let currentResults = [];
+            let deferredPrompt = null;
 
-        // ============================================
-        // STATUS
-        // ============================================
-        function setStatus(text, type = 'idle') {
-            statusText.textContent = text;
-            statusDot.className = 'status-dot';
-            if (type === 'active') statusDot.classList.add('active');
-            else if (type === 'success') statusDot.classList.add('success');
-        }
+            // ============================================================
+            //  HTTPS / SECURITY CHECK
+            // ============================================================
 
-        // ============================================
-        // FILE HANDLERS
-        // ============================================
-        document.getElementById('openUassetBtn').addEventListener('click', () => {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.uasset';
-            input.onchange = (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    uassetData = new Uint8Array(event.target.result);
-                    uassetName = file.name;
-                    fileInfo.classList.add('loaded');
-                    fileInfo.innerHTML = `
-                        <span class="info-icon">📄</span>
-                        <span class="info-text">${file.name}</span>
-                        <span class="info-badge">${(file.size / 1024).toFixed(1)} KB</span>
-                    `;
-                    setStatus('UASSET loaded', 'success');
-                    showToast(`Loaded: ${file.name}`, '📂');
+            function checkHttps() {
+                const isSecure = window.location.protocol === 'https:' ||
+                    window.location.hostname === 'localhost' ||
+                    window.location.hostname === '127.0.0.1' ||
+                    window.location.hostname === '[::1]';
+                if (!isSecure) {
+                    httpsWarning.classList.add('show');
+                    console.warn('⚠️ Not served over HTTPS — installation will not work.');
+                } else {
+                    httpsWarning.classList.remove('show');
+                }
+                return isSecure;
+            }
+
+            // ============================================================
+            //  MANIFEST (uses bizapro.png)
+            // ============================================================
+
+            function buildManifest() {
+                const iconSizes = [72, 96, 128, 144, 152, 192, 384, 512];
+                const icons = iconSizes.map(s => ({
+                    src: 'bizapro.png',
+                    sizes: `${s}x${s}`,
+                    type: 'image/png',
+                    purpose: 'any maskable'
+                }));
+                return {
+                    name: 'BIZAPRO Skin Tool',
+                    short_name: 'BIZAPRO Skin',
+                    description: 'Search and extract skin data from .uasset files',
+                    start_url: window.location.href.split('?')[0],
+                    display: 'standalone',
+                    orientation: 'any',
+                    background_color: '#05030f',
+                    theme_color: '#05030f',
+                    categories: ['utilities', 'productivity'],
+                    icons: icons,
+                    prefer_related_applications: false,
                 };
-                reader.readAsArrayBuffer(file);
-            };
-            input.click();
-        });
+            }
 
-        document.getElementById('loadSkinsBtn').addEventListener('click', () => {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.txt';
-            input.onchange = (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    const lines = event.target.result.split('\n');
-                    skinDatabase = {};
-                    for (const line of lines) {
-                        if (line.includes('|')) {
-                            const parts = line.split('|').map(s => s.trim());
-                            if (parts.length >= 5) {
-                                skinDatabase[parts[0]] = parts;
+            function registerManifest() {
+                try {
+                    const manifest = buildManifest();
+                    const json = JSON.stringify(manifest);
+                    const blob = new Blob([json], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.getElementById('manifestLink');
+                    link.href = url;
+                    console.log('✅ Manifest registered with bizapro.png');
+                    return true;
+                } catch (e) {
+                    console.warn('Manifest registration failed:', e);
+                    return false;
+                }
+            }
+
+            // ============================================================
+            //  SERVICE WORKER
+            // ============================================================
+
+            function registerServiceWorker() {
+                if (!('serviceWorker' in navigator)) {
+                    console.warn('Service workers not supported');
+                    return false;
+                }
+                try {
+                    const swCode = `
+                            self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
+                            self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
+                            self.addEventListener('fetch', e => {
+                                e.respondWith(fetch(e.request).catch(() => new Response('Offline', { status: 503 })));
+                            });
+                        `;
+                    const blob = new Blob([swCode], { type: 'application/javascript' });
+                    const swUrl = URL.createObjectURL(blob);
+                    navigator.serviceWorker.register(swUrl, { scope: '/' })
+                        .then(() => console.log('✅ Service worker registered'))
+                        .catch(err => console.warn('SW registration failed:', err));
+                    return true;
+                } catch (e) {
+                    console.warn('Service worker setup failed:', e);
+                    return false;
+                }
+            }
+
+            // ============================================================
+            //  INSTALL PROMPT + GUIDE
+            // ============================================================
+
+            function setupInstallPrompt() {
+                const isSecure = checkHttps();
+
+                window.addEventListener('beforeinstallprompt', (e) => {
+                    e.preventDefault();
+                    deferredPrompt = e;
+                    if (isSecure) {
+                        installBanner.classList.add('show');
+                        console.log('📱 Install prompt available');
+                    } else {
+                        httpsWarning.classList.add('show');
+                    }
+                    updateGuideStatus();
+                });
+
+                window.addEventListener('appinstalled', () => {
+                    installBanner.classList.remove('show');
+                    deferredPrompt = null;
+                    console.log('✅ App installed');
+                    setStatus('installed ✓', true);
+                    updateGuideStatus();
+                });
+
+                installBtn.addEventListener('click', async () => {
+                    if (deferredPrompt) {
+                        try {
+                            const result = await deferredPrompt.prompt();
+                            if (result.outcome === 'accepted') {
+                                console.log('✅ User accepted install');
+                                installBanner.classList.remove('show');
+                            } else {
+                                console.log('❌ User declined install');
+                            }
+                            deferredPrompt = null;
+                        } catch (err) {
+                            console.warn('Install prompt error:', err);
+                            if (!checkHttps()) {
+                                alert(
+                                    '🔒 HTTPS required for installation.\n\n' +
+                                    'Please serve this page over HTTPS or localhost.\n' +
+                                    'Try: npx serve .  or  python -m http.server'
+                                );
+                            } else {
+                                alert('Installation failed. Please use your browser\'s "Add to Home Screen" option.');
                             }
                         }
+                    } else {
+                        if (!checkHttps()) {
+                            alert(
+                                '🔒 HTTPS required for installation.\n\n' +
+                                'Please serve this page over HTTPS or localhost.\n' +
+                                'Try: npx serve .  or  python -m http.server'
+                            );
+                        } else {
+                            // Show guide
+                            showGuide();
+                        }
                     }
-                    const count = Object.keys(skinDatabase).length;
-                    skinInfo.classList.add('loaded');
-                    skinInfo.innerHTML = `
-                        <span class="info-icon">🗃️</span>
-                        <span class="info-text">${count} skin entries loaded</span>
-                        <span class="info-badge">${count}</span>
+                });
+
+                dismissInstallBtn.addEventListener('click', () => {
+                    installBanner.classList.remove('show');
+                });
+
+                // Guide buttons
+                guideBtn.addEventListener('click', showGuide);
+                guideClose.addEventListener('click', hideGuide);
+                guideOverlay.addEventListener('click', (e) => {
+                    if (e.target === guideOverlay) hideGuide();
+                });
+            }
+
+            function showGuide() {
+                guideOverlay.classList.add('active');
+                updateGuideStatus();
+            }
+
+            function hideGuide() {
+                guideOverlay.classList.remove('active');
+            }
+
+            function updateGuideStatus() {
+                const isSecure = checkHttps();
+                const hasPrompt = !!deferredPrompt;
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                const isAndroid = /Android/.test(navigator.userAgent);
+                let statusHtml = '';
+
+                if (isSecure && hasPrompt) {
+                    statusHtml = `<span class="ok">✅ Ready to install — tap the INSTALL button above.</span>`;
+                } else if (isSecure && !hasPrompt) {
+                    if (isIOS) {
+                        statusHtml = `<span class="ok">📱 iOS detected: use the share icon <i class="fas fa-square-arrow-up"></i> → "Add to Home Screen".</span>`;
+                    } else if (isAndroid) {
+                        statusHtml = `<span class="ok">📱 Android detected: use the browser menu <i class="fas fa-ellipsis-v"></i> → "Add to Home screen".</span>`;
+                    } else {
+                        statusHtml = `<span class="ok">💻 Desktop: use the install icon in the address bar or the INSTALL button.</span>`;
+                    }
+                } else {
+                    statusHtml = `<span class="fail">⚠️ Not served over HTTPS. Serve using <code style="background:rgba(255,255,255,0.05);padding:2px 8px;border-radius:4px;">npx serve</code> or a secure server.</span>`;
+                }
+                guideStatus.innerHTML = '<i class="fas fa-circle-info"></i> ' + statusHtml;
+            }
+
+            // ============================================================
+            //  CORE APP LOGIC
+            // ============================================================
+
+            function hexBytes(bytes) {
+                return Array.from(bytes)
+                    .map(b => b.toString(16).toUpperCase().padStart(2, '0'))
+                    .join(' ');
+            }
+
+            function idToLittleHex(idStr) {
+                const num = parseInt(idStr, 10);
+                if (isNaN(num)) return '00000000';
+                const buf = new ArrayBuffer(4);
+                const view = new DataView(buf);
+                view.setUint32(0, num, true);
+                return Array.from(new Uint8Array(buf))
+                    .map(b => b.toString(16).toUpperCase().padStart(2, '0'))
+                    .join('');
+            }
+
+            function setStatus(text, isOk = true) {
+                statusText.textContent = text;
+                const dot = document.querySelector('.status-dot');
+                if (isOk) {
+                    dot.style.background = '#4ade80';
+                    dot.style.boxShadow = '0 0 16px rgba(74,222,128,0.4)';
+                } else {
+                    dot.style.background = '#f87171';
+                    dot.style.boxShadow = '0 0 16px rgba(248,113,113,0.4)';
+                }
+            }
+
+            function setPlaceholder(msg, icon = 'fa-info-circle') {
+                placeholder.style.display = 'flex';
+                placeholder.innerHTML = `
+                        <i class="fas ${icon}" style="opacity:0.3;"></i>
+                        <span>${msg}</span>
                     `;
-                    skinCount.textContent = `Skins: ${count}`;
-                    skinCount.classList.add('has-skins');
-                    setStatus('Database loaded', 'success');
-                    showToast(`Loaded ${count} skin entries`, '📜');
+                resultBox.innerHTML = '';
+                const existing = resultBox.querySelector('.result-placeholder');
+                if (!existing) resultBox.appendChild(placeholder);
+                resultCount.textContent = '0 results';
+                currentResults = [];
+            }
+
+            function showResults(lines) {
+                const ph = resultBox.querySelector('.result-placeholder');
+                if (ph) ph.remove();
+                if (lines.length === 0) {
+                    setPlaceholder('No matches found', 'fa-search');
+                    return;
+                }
+                let html = '';
+                for (const line of lines) {
+                    html += `<div class="result-line">${line}</div>`;
+                }
+                resultBox.innerHTML = html;
+                currentResults = lines;
+                resultCount.textContent = `${lines.length} result${lines.length > 1 ? 's' : ''}`;
+            }
+
+            // ----- open .uasset -----
+            function handleUasset(file) {
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const arrayBuffer = e.target.result;
+                        fileData = new Uint8Array(arrayBuffer);
+                        fileLoaded = true;
+                        const name = file.name.length > 30 ? file.name.slice(0, 27) + '…' : file.name;
+                        fileLabel.innerHTML = `<i class="fas fa-check-circle"></i> ${name}`;
+                        fileLabel.classList.add('loaded');
+                        setStatus('uasset loaded', true);
+                        setPlaceholder(`✅ ${file.name} loaded — enter a skin ID or name`, 'fa-check-circle');
+                    } catch (err) {
+                        setStatus('Error reading file', false);
+                        setPlaceholder('❌ Failed to read .uasset file', 'fa-exclamation-triangle');
+                        console.error(err);
+                    }
+                };
+                reader.onerror = function() {
+                    setStatus('File read error', false);
+                    setPlaceholder('❌ Could not read file', 'fa-exclamation-triangle');
+                };
+                reader.readAsArrayBuffer(file);
+            }
+
+            // ----- load skins.txt -----
+            function handleSkins(file) {
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const text = e.target.result;
+                        const lines = text.split(/\r?\n/);
+                        skinDB = {};
+                        let count = 0;
+                        for (const line of lines) {
+                            if (!line.includes('|')) continue;
+                            const parts = line.split('|').map(s => s.trim());
+                            if (parts.length >= 3) {
+                                const id = parts[0];
+                                const hex = parts[1];
+                                const name = parts[2];
+                                skinDB[id] = { hex, name };
+                                count++;
+                            }
+                        }
+                        skinsLoaded = true;
+                        const name = file.name.length > 30 ? file.name.slice(0, 27) + '…' : file.name;
+                        skinLabel.innerHTML = `<i class="fas fa-database"></i> ${count} skins (${name})`;
+                        skinLabel.classList.add('loaded');
+                        setStatus(`${count} skins loaded`, true);
+                        setPlaceholder(`✅ ${count} skins loaded — enter a skin ID or name`, 'fa-check-circle');
+                    } catch (err) {
+                        setStatus('Error parsing skins', false);
+                        setPlaceholder('❌ Failed to parse skins.txt', 'fa-exclamation-triangle');
+                        console.error(err);
+                    }
+                };
+                reader.onerror = function() {
+                    setStatus('File read error', false);
+                    setPlaceholder('❌ Could not read skins file', 'fa-exclamation-triangle');
                 };
                 reader.readAsText(file);
-            };
-            input.click();
-        });
-
-        // ============================================
-        // HEX HELPERS
-        // ============================================
-        function hexBytes(data, start, length) {
-            const end = Math.min(start + length, data.length);
-            return Array.from(data.slice(start, end))
-                .map(b => b.toString(16).padStart(2, '0').toUpperCase())
-                .join(' ');
-        }
-
-        // ============================================
-        // SEARCH
-        // ============================================
-        document.getElementById('findBtn').addEventListener('click', async () => {
-            if (!uassetData) {
-                showToast('Please open a UASSET file first!', '⚠️');
-                return;
             }
 
-            const ids = searchIds.value.split(',').map(s => s.trim()).filter(s => s);
-            if (ids.length === 0) {
-                showToast('Please enter at least one ID!', '⚠️');
-                return;
+            // ----- AUTO-LOAD -----
+            async function autoLoadFiles() {
+                try {
+                    const uassetResp = await fetch('Item.uasset');
+                    if (uassetResp.ok) {
+                        const arrayBuffer = await uassetResp.arrayBuffer();
+                        fileData = new Uint8Array(arrayBuffer);
+                        fileLoaded = true;
+                        fileLabel.innerHTML = `<i class="fas fa-check-circle"></i> Item.uasset (auto)`;
+                        fileLabel.classList.add('loaded');
+                        setStatus('uasset auto-loaded', true);
+                        setPlaceholder('✅ Item.uasset loaded — enter a skin ID or name', 'fa-check-circle');
+                    } else {
+                        console.warn('Item.uasset not found, manual load required');
+                    }
+                } catch (e) {
+                    console.warn('Auto-load Item.uasset failed:', e.message);
+                }
+
+                try {
+                    const skinResp = await fetch('skin.txt');
+                    if (skinResp.ok) {
+                        const text = await skinResp.text();
+                        const lines = text.split(/\r?\n/);
+                        skinDB = {};
+                        let count = 0;
+                        for (const line of lines) {
+                            if (!line.includes('|')) continue;
+                            const parts = line.split('|').map(s => s.trim());
+                            if (parts.length >= 3) {
+                                const id = parts[0];
+                                const hex = parts[1];
+                                const name = parts[2];
+                                skinDB[id] = { hex, name };
+                                count++;
+                            }
+                        }
+                        skinsLoaded = true;
+                        skinLabel.innerHTML = `<i class="fas fa-database"></i> ${count} skins (skin.txt auto)`;
+                        skinLabel.classList.add('loaded');
+                        setStatus(`${count} skins auto-loaded`, true);
+                        setPlaceholder(`✅ ${count} skins loaded — enter a skin ID or name`, 'fa-check-circle');
+                    } else {
+                        console.warn('skin.txt not found, manual load required');
+                    }
+                } catch (e) {
+                    console.warn('Auto-load skin.txt failed:', e.message);
+                }
+
+                if (!fileLoaded && !skinsLoaded) {
+                    setPlaceholder('Place Item.uasset & skin.txt in this folder, or use buttons below.', 'fa-info-circle');
+                    setStatus('waiting for files', false);
+                } else if (!fileLoaded) {
+                    setPlaceholder('✅ skin.txt loaded — open Item.uasset manually.', 'fa-info-circle');
+                } else if (!skinsLoaded) {
+                    setPlaceholder('✅ Item.uasset loaded — load skin.txt manually.', 'fa-info-circle');
+                }
             }
 
-            const length = parseInt(searchLength.value) || 12;
+            // ----- SEARCH -----
+            function performSearch() {
+                const raw = searchInput.value.trim();
+                if (!raw) {
+                    setPlaceholder('Enter a skin ID or name', 'fa-search');
+                    return;
+                }
+                if (!fileData) {
+                    setPlaceholder('⚠️ Open a .uasset file first', 'fa-exclamation-triangle');
+                    return;
+                }
+                if (Object.keys(skinDB).length === 0) {
+                    setPlaceholder('⚠️ Load skins.txt first', 'fa-exclamation-triangle');
+                    return;
+                }
 
-            // Loading state
-            findBtn.classList.add('loading');
-            setStatus('Searching...', 'active');
+                const tokens = raw.split(',').map(s => s.trim()).filter(s => s.length > 0);
+                if (tokens.length === 0) {
+                    setPlaceholder('No valid input', 'fa-info-circle');
+                    return;
+                }
 
-            // Simulate async (actually sync but we want UI update)
-            await new Promise(resolve => setTimeout(resolve, 100));
+                const targetIds = new Set();
+                for (const token of tokens) {
+                    if (/^\d+$/.test(token)) {
+                        targetIds.add(token);
+                    } else {
+                        const matches = Object.keys(skinDB).filter(
+                            id => skinDB[id].name.toLowerCase() === token.toLowerCase()
+                        );
+                        if (matches.length === 0) {
+                            setPlaceholder(`✗ No exact skin for name: "${token}"`, 'fa-times-circle');
+                            return;
+                        }
+                        matches.forEach(id => targetIds.add(id));
+                    }
+                }
 
-            const data = uassetData;
-            let total = 0;
-            let output = '';
+                if (targetIds.size === 0) {
+                    setPlaceholder('No valid targets', 'fa-info-circle');
+                    return;
+                }
 
-            for (const id of ids) {
-                const idBytes = new TextEncoder().encode(id);
-                const foundPositions = [];
-                let pos = 0;
+                const results = [];
+                const data = fileData;
 
-                while (pos < data.length) {
-                    const found = data.indexOf(idBytes[0], pos);
-                    if (found === -1) break;
+                for (const target of targetIds) {
+                    const targetBytes = Array.from(target, ch => ch.charCodeAt(0));
+                    const pattern = [0x00, ...targetBytes, 0x00];
+                    const extractLen = target.length + 5;
 
-                    let match = true;
-                    for (let i = 0; i < idBytes.length; i++) {
-                        if (found + i >= data.length || data[found + i] !== idBytes[i]) {
-                            match = false;
+                    let pos = 0;
+                    while (pos < data.length) {
+                        let found = false;
+                        for (let i = pos; i <= data.length - pattern.length; i++) {
+                            let match = true;
+                            for (let j = 0; j < pattern.length; j++) {
+                                if (data[i + j] !== pattern[j]) { match = false; break; }
+                            }
+                            if (match) {
+                                const start = i + 1;
+                                if (start + extractLen <= data.length) {
+                                    const rawBytes = data.slice(start, start + extractLen);
+                                    const skin = skinDB[target] || { name: 'UNKNOWN', hex: '???????' };
+                                    const little = idToLittleHex(target);
+                                    const hexStr = hexBytes(rawBytes);
+                                    const nameDisplay = skin.name.padEnd(30).slice(0, 30);
+                                    results.push(
+                                        `${nameDisplay}  ${target} | ${little} | : ${hexStr}`
+                                    );
+                                }
+                                pos = i + 1;
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) break;
+                    }
+                }
+
+                if (results.length === 0) {
+                    setPlaceholder(`🔍 No matches found for ${targetIds.size} target(s)`, 'fa-search');
+                    return;
+                }
+
+                showResults(results);
+                setStatus(`${results.length} matches`, true);
+            }
+
+            // ----- copy -----
+            function copyAll() {
+                if (currentResults.length === 0) {
+                    alert('Nothing to copy — run a search first.');
+                    return;
+                }
+                const text = currentResults.join('\n');
+                navigator.clipboard.writeText(text).then(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> COPIED';
+                    setTimeout(() => {
+                        copyBtn.innerHTML = '<i class="fas fa-copy"></i> COPY <span class="shortcut-hint">⇧⌘C</span>';
+                    }, 1500);
+                }).catch(() => {
+                    const ta = document.createElement('textarea');
+                    ta.value = text;
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    ta.remove();
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> COPIED';
+                    setTimeout(() => {
+                        copyBtn.innerHTML = '<i class="fas fa-copy"></i> COPY <span class="shortcut-hint">⇧⌘C</span>';
+                    }, 1500);
+                });
+            }
+
+            // ----- save -----
+            function saveTxt() {
+                if (currentResults.length === 0) {
+                    alert('Nothing to save — run a search first.');
+                    return;
+                }
+                const text = currentResults.join('\n');
+                const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `bizapro_results_${Date.now()}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                URL.revokeObjectURL(url);
+                saveBtn.innerHTML = '<i class="fas fa-check"></i> SAVED';
+                setTimeout(() => {
+                    saveBtn.innerHTML = '<i class="fas fa-save"></i> SAVE TXT <span class="shortcut-hint">⇧⌘S</span>';
+                }, 1500);
+            }
+
+            // ----- clear -----
+            function clearAll() {
+                searchInput.value = '';
+                setPlaceholder('Ready — enter a skin ID or name', 'fa-search');
+                currentResults = [];
+                resultCount.textContent = '0 results';
+                setStatus('ready', true);
+                const ph = resultBox.querySelector('.result-placeholder');
+                if (!ph) {
+                    resultBox.innerHTML = '';
+                    resultBox.appendChild(placeholder);
+                }
+                searchInput.focus();
+            }
+
+            // ----- shortcuts help -----
+            function toggleShortcuts(show) {
+                if (show === undefined) {
+                    shortcutsOverlay.classList.toggle('active');
+                } else if (show) {
+                    shortcutsOverlay.classList.add('active');
+                } else {
+                    shortcutsOverlay.classList.remove('active');
+                }
+            }
+
+            // ============================================================
+            //  INIT
+            // ============================================================
+
+            async function init() {
+                // --- PWA ---
+                registerManifest();
+                registerServiceWorker();
+                setupInstallPrompt();
+
+                // --- File inputs ---
+                openBtn.addEventListener('click', () => uassetInput.click());
+                loadSkinsBtn.addEventListener('click', () => skinsInput.click());
+
+                uassetInput.addEventListener('change', function(e) {
+                    if (this.files && this.files.length > 0) {
+                        handleUasset(this.files[0]);
+                    }
+                    this.value = '';
+                });
+
+                skinsInput.addEventListener('change', function(e) {
+                    if (this.files && this.files.length > 0) {
+                        handleSkins(this.files[0]);
+                    }
+                    this.value = '';
+                });
+
+                // --- Search ---
+                findBtn.addEventListener('click', performSearch);
+                searchInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        performSearch();
+                    }
+                });
+
+                // --- Toolbar ---
+                copyBtn.addEventListener('click', copyAll);
+                saveBtn.addEventListener('click', saveTxt);
+                clearBtn.addEventListener('click', clearAll);
+
+                // --- Shortcuts help ---
+                shortcutsToggle.addEventListener('click', () => toggleShortcuts());
+                shortcutsClose.addEventListener('click', () => toggleShortcuts(false));
+                shortcutsOverlay.addEventListener('click', (e) => {
+                    if (e.target === shortcutsOverlay) toggleShortcuts(false);
+                });
+
+                // --- Keyboard shortcuts ---
+                document.addEventListener('keydown', function(e) {
+                    const ctrl = e.ctrlKey || e.metaKey;
+                    const shift = e.shiftKey;
+                    const tag = e.target.tagName.toLowerCase();
+                    const isInput = tag === 'input' || tag === 'textarea' || tag === 'select';
+                    const isSearchFocused = isInput && e.target === searchInput;
+
+                    if (e.key === '?' && !ctrl && !shift && !isInput) {
+                        e.preventDefault();
+                        toggleShortcuts();
+                        return;
+                    }
+
+                    if (e.key === 'Escape') {
+                        if (shortcutsOverlay.classList.contains('active')) {
+                            e.preventDefault();
+                            toggleShortcuts(false);
+                            return;
+                        }
+                        if (guideOverlay.classList.contains('active')) {
+                            e.preventDefault();
+                            hideGuide();
+                            return;
+                        }
+                        if (isSearchFocused && searchInput.value.length > 0) {
+                            e.preventDefault();
+                            searchInput.value = '';
+                            return;
+                        }
+                        if (!isInput || isSearchFocused) {
+                            e.preventDefault();
+                            clearAll();
+                        }
+                        return;
+                    }
+
+                    if (ctrl && e.key === 'o' && !shift) {
+                        e.preventDefault();
+                        uassetInput.click();
+                        return;
+                    }
+
+                    if (ctrl && shift && (e.key === 'l' || e.key === 'L')) {
+                        e.preventDefault();
+                        skinsInput.click();
+                        return;
+                    }
+
+                    if (ctrl && (e.key === 'f' || e.key === 'F') && !isInput) {
+                        e.preventDefault();
+                        searchInput.focus();
+                        searchInput.select();
+                        return;
+                    }
+
+                    if (e.key === 'Enter' && isSearchFocused) {
+                        e.preventDefault();
+                        performSearch();
+                        return;
+                    }
+
+                    if (ctrl && e.key === 'Enter' && !isInput) {
+                        e.preventDefault();
+                        performSearch();
+                        return;
+                    }
+
+                    if (ctrl && shift && (e.key === 'c' || e.key === 'C')) {
+                        e.preventDefault();
+                        copyAll();
+                        return;
+                    }
+
+                    if (ctrl && shift && (e.key === 's' || e.key === 'S')) {
+                        e.preventDefault();
+                        saveTxt();
+                        return;
+                    }
+
+                    if (ctrl && shift && (e.key === 'x' || e.key === 'X')) {
+                        e.preventDefault();
+                        clearAll();
+                        return;
+                    }
+                });
+
+                // --- Drag and drop ---
+                const container = document.querySelector('.glass-container');
+                container.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    container.style.borderColor = 'rgba(120,180,255,0.3)';
+                });
+                container.addEventListener('dragleave', () => {
+                    container.style.borderColor = 'rgba(255,255,255,0.07)';
+                });
+                container.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    container.style.borderColor = 'rgba(255,255,255,0.07)';
+                    const files = e.dataTransfer.files;
+                    for (const file of files) {
+                        if (file.name.toLowerCase().endsWith('.uasset')) {
+                            handleUasset(file);
+                            break;
+                        }
+                        if (file.name.toLowerCase().endsWith('.txt')) {
+                            handleSkins(file);
                             break;
                         }
                     }
+                });
 
-                    if (match) {
-                        foundPositions.push(found);
-                        pos = found + 1;
-                    } else {
-                        pos = found + 1;
-                    }
-                }
+                // --- AUTO-LOAD ---
+                await autoLoadFiles();
 
-                if (foundPositions.length === 0) {
-                    output += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-                    output += `ID        : ${id}\n`;
-                    output += `STATUS    : NOT FOUND\n\n`;
-                    continue;
-                }
+                // Update guide status after everything
+                setTimeout(updateGuideStatus, 500);
 
-                const skinInfo = skinDatabase[id] || ['', '', 'UNKNOWN', 'UNKNOWN', 'UNKNOWN'];
-                output += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-                output += `SKIN NAME : ${skinInfo[2] || 'UNKNOWN'}\n`;
-                output += `ID        : ${id}\n`;
-                output += `TYPE      : ${skinInfo[3] || 'UNKNOWN'}\n`;
-                output += `RARITY    : ${skinInfo[4] || 'UNKNOWN'}\n\n`;
-                output += `TOTAL MATCHES : ${foundPositions.length}\n\n`;
-
-                for (let i = 0; i < foundPositions.length; i++) {
-                    const offset = foundPositions[i];
-                    const hex = hexBytes(data, offset, length);
-                    output += `▸ MATCH #${i + 1}\n`;
-                    output += `  OFFSET  : ${offset}\n`;
-                    output += `  HEX     : ${hex}\n\n`;
-                    total++;
-                }
-                output += '\n';
+                console.log('⚔️ BIZAPRO · SKIN TOOL  |  Install help added  |  Shortcuts: ? for help');
             }
 
-            output += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-            output += `TOTAL FOUND : ${total}`;
-
-            results.textContent = output;
-            resultCount.textContent = `${total} found`;
-            resultCount.classList.toggle('has-results', total > 0);
-            resultsText = output;
-            lastResults = output;
-            setStatus(`Search complete — ${total} matches`, 'success');
-            showToast(`Found ${total} matches`, '🔍');
-
-            findBtn.classList.remove('loading');
-        });
-
-        // ============================================
-        // COPY
-        // ============================================
-        document.getElementById('copyBtn').addEventListener('click', () => {
-            if (!lastResults) {
-                showToast('No results to copy!', '⚠️');
-                return;
-            }
-            
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(lastResults).then(() => {
-                    showToast('Copied to clipboard!', '📋');
-                    setStatus('Copied!', 'success');
-                }).catch(() => fallbackCopy());
+            // --- Run ---
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
             } else {
-                fallbackCopy();
-            }
-        });
-
-        function fallbackCopy() {
-            const textarea = document.createElement('textarea');
-            textarea.value = lastResults;
-            textarea.style.position = 'fixed';
-            textarea.style.opacity = '0';
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                document.execCommand('copy');
-                showToast('Copied to clipboard!', '📋');
-                setStatus('Copied!', 'success');
-            } catch (e) {
-                showToast('Failed to copy', '❌');
-            }
-            document.body.removeChild(textarea);
-        }
-
-        // ============================================
-        // SAVE
-        // ============================================
-        document.getElementById('saveBtn').addEventListener('click', () => {
-            if (!lastResults) {
-                showToast('No results to save!', '⚠️');
-                return;
+                init();
             }
 
-            const blob = new Blob([lastResults], { type: 'text/plain' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = `bizapro_${new Date().toISOString().slice(0,10)}.txt`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(a.href);
-            showToast('File saved!', '💾');
-            setStatus('Saved!', 'success');
-        });
-
-        // ============================================
-        // KEYBOARD SHORTCUTS
-        // ============================================
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && e.ctrlKey) {
-                e.preventDefault();
-                document.getElementById('findBtn').click();
-            }
-        });
-
-        // ============================================
-        // INIT
-        // ============================================
-        setStatus('Ready', 'idle');
-        console.log('BIZAPRO HEX FINDER — Premium Edition');
-        console.log('📂 Open a UASSET file to begin');
+        })();
     </script>
+
 </body>
 </html>
