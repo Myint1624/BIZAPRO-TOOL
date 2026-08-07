@@ -13,6 +13,7 @@
     <meta name="theme-color" content="#05030f" />
     <meta name="msapplication-TileColor" content="#05030f" />
 
+    <!-- Manifest will be injected as data URI -->
     <link id="manifestLink" rel="manifest" href="#" />
 
     <!-- Icons: use bizapro.png -->
@@ -67,7 +68,6 @@
             pointer-events: none;
         }
 
-        /* ---------- HEADER ---------- */
         .header {
             display: flex;
             align-items: center;
@@ -153,7 +153,6 @@
             }
         }
 
-        /* ---------- BUTTON ROW ---------- */
         .actions {
             display: flex;
             flex-wrap: wrap;
@@ -371,7 +370,7 @@
             font-size: 9px;
         }
 
-        /* ---------- INSTALL BANNER & HELP ---------- */
+        /* ---------- INSTALL BANNER ---------- */
         .install-banner {
             display: none;
             align-items: center;
@@ -418,172 +417,89 @@
             font-size: 14px;
         }
 
-        .install-guide-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.4);
-            padding: 8px 16px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.25s ease;
-            font-family: inherit;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .install-guide-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* ---------- HTTPS WARNING ---------- */
-        .https-warning {
+        /* ---------- HTTPS / DIAGNOSTIC WARNING ---------- */
+        .diagnostic-box {
             display: none;
-            background: rgba(248, 113, 113, 0.08);
-            border: 1px solid rgba(248, 113, 113, 0.15);
+            background: rgba(255, 200, 100, 0.06);
+            border: 1px solid rgba(255, 200, 100, 0.15);
             border-radius: 16px;
-            padding: 12px 20px;
+            padding: 14px 20px;
             margin-bottom: 20px;
-            color: rgba(255, 200, 200, 0.7);
+            color: rgba(255, 220, 180, 0.8);
             font-size: 13px;
+            align-items: flex-start;
+            gap: 14px;
+            flex-direction: column;
+        }
+
+        .diagnostic-box.show {
+            display: flex;
+        }
+
+        .diagnostic-box .diag-row {
+            display: flex;
             align-items: center;
             gap: 12px;
+            width: 100%;
+            flex-wrap: wrap;
         }
 
-        .https-warning.show {
-            display: flex;
-        }
-
-        .https-warning i {
-            color: #f87171;
+        .diagnostic-box .diag-row i {
             font-size: 18px;
+            width: 24px;
+            text-align: center;
         }
 
-        .https-warning code {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2px 10px;
-            border-radius: 6px;
+        .diagnostic-box .diag-row .label {
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+            min-width: 120px;
+        }
+
+        .diagnostic-box .diag-row .value {
+            color: rgba(255, 255, 255, 0.8);
             font-family: monospace;
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        /* ---------- INSTALL GUIDE OVERLAY ---------- */
-        .guide-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            padding: 24px;
-            animation: fadeIn 0.25s ease;
-        }
-
-        .guide-overlay.active {
-            display: flex;
-        }
-
-        .guide-panel {
-            background: rgba(20, 18, 40, 0.95);
-            backdrop-filter: blur(32px);
-            -webkit-backdrop-filter: blur(32px);
-            border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            padding: 40px 48px 44px;
-            max-width: 540px;
-            width: 100%;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .guide-panel h2 {
-            font-size: 22px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 6px;
-            letter-spacing: -0.3px;
-        }
-
-        .guide-panel .sub {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 13px;
-            margin-bottom: 24px;
-        }
-
-        .guide-step {
-            display: flex;
-            gap: 16px;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            align-items: flex-start;
-        }
-
-        .guide-step .num {
-            min-width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: rgba(120, 180, 255, 0.1);
-            color: rgba(120, 180, 255, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .guide-step .text {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .guide-step .text strong {
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .guide-close {
-            position: absolute;
-            top: 16px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.15);
-            font-size: 22px;
-            cursor: pointer;
-            transition: color 0.2s ease;
-            font-family: inherit;
-        }
-
-        .guide-close:hover {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .guide-status {
-            margin-top: 20px;
-            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 2px 12px;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.04);
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 13px;
         }
 
-        .guide-status .ok {
+        .diagnostic-box .diag-row .value.ok {
             color: #4ade80;
+            border-color: rgba(74, 222, 128, 0.15);
         }
-        .guide-status .fail {
+
+        .diagnostic-box .diag-row .value.err {
             color: #f87171;
+            border-color: rgba(248, 113, 113, 0.15);
+        }
+
+        .diagnostic-box .diag-row .value.warn {
+            color: #fbbf24;
+            border-color: rgba(251, 191, 36, 0.15);
+        }
+
+        .diagnostic-box .instruction {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            padding: 8px 0 4px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 12px;
+        }
+
+        .diagnostic-box .instruction code {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         /* ---------- RESULT BOX ---------- */
@@ -622,14 +538,17 @@
         .result-box::-webkit-scrollbar {
             width: 6px;
         }
+
         .result-box::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.02);
             border-radius: 10px;
         }
+
         .result-box::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.08);
             border-radius: 10px;
         }
+
         .result-box::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.15);
         }
@@ -942,12 +861,9 @@
                 padding: 6px 14px;
                 font-size: 12px;
             }
-            .https-warning {
+            .diagnostic-box {
                 font-size: 12px;
-                padding: 10px 16px;
-            }
-            .guide-panel {
-                padding: 28px 22px 32px;
+                padding: 12px 16px;
             }
         }
 
@@ -1023,13 +939,13 @@
             .install-banner .actions {
                 justify-content: center;
             }
-            .https-warning {
+            .diagnostic-box .diag-row {
                 flex-direction: column;
-                text-align: center;
-                gap: 6px;
+                align-items: flex-start;
+                gap: 4px;
             }
-            .guide-panel {
-                padding: 20px 16px 24px;
+            .diagnostic-box .diag-row .label {
+                min-width: auto;
             }
         }
     </style>
@@ -1051,13 +967,33 @@
             </div>
         </div>
 
-        <!-- HTTPS WARNING -->
-        <div class="https-warning" id="httpsWarning">
-            <i class="fas fa-exclamation-triangle"></i>
-            <span>
-                <strong>HTTPS required for automatic installation.</strong>
-                Serve over HTTPS or localhost. <span style="opacity:0.4;margin-left:8px;">(or use <code>npx serve</code>)</span>
-            </span>
+        <!-- DIAGNOSTIC / INSTALL HELP -->
+        <div class="diagnostic-box" id="diagnosticBox">
+            <div class="diag-row">
+                <i class="fas fa-globe"></i>
+                <span class="label">Protocol</span>
+                <span class="value" id="diagProtocol">-</span>
+            </div>
+            <div class="diag-row">
+                <i class="fas fa-check-circle"></i>
+                <span class="label">Manifest</span>
+                <span class="value" id="diagManifest">-</span>
+            </div>
+            <div class="diag-row">
+                <i class="fas fa-cogs"></i>
+                <span class="label">Service Worker</span>
+                <span class="value" id="diagSW">-</span>
+            </div>
+            <div class="diag-row">
+                <i class="fas fa-download"></i>
+                <span class="label">Install Prompt</span>
+                <span class="value" id="diagInstall">-</span>
+            </div>
+            <div class="instruction" id="diagInstruction">
+                <i class="fas fa-lightbulb" style="opacity:0.4;"></i>
+                <span>For installation, serve this page over <strong>HTTPS</strong> or <strong>localhost</strong>.</span>
+                <span>Try: <code>npx serve .</code> or <code>python -m http.server</code></span>
+            </div>
         </div>
 
         <!-- INSTALL BANNER -->
@@ -1072,9 +1008,6 @@
                 </button>
                 <button class="glass-btn" id="dismissInstallBtn">
                     <i class="fas fa-times"></i>
-                </button>
-                <button class="install-guide-btn" id="guideBtn">
-                    <i class="fas fa-question-circle"></i> Help
                 </button>
             </div>
         </div>
@@ -1159,36 +1092,6 @@
 
     </div>
 
-    <!-- INSTALL GUIDE OVERLAY -->
-    <div class="guide-overlay" id="guideOverlay">
-        <div class="guide-panel">
-            <button class="guide-close" id="guideClose">&times;</button>
-            <h2>📲 How to Install</h2>
-            <p class="sub">Follow these steps to add BIZAPRO Skin Tool to your home screen</p>
-
-            <div class="guide-step">
-                <span class="num">1</span>
-                <div class="text"><strong>Android / Chrome:</strong> Tap the <strong>INSTALL</strong> button above (if visible) or use the browser menu <i class="fas fa-ellipsis-v" style="opacity:0.5;"></i> → <strong>"Add to Home screen"</strong>.</div>
-            </div>
-            <div class="guide-step">
-                <span class="num">2</span>
-                <div class="text"><strong>iOS / Safari:</strong> Tap the share icon <i class="fas fa-square-arrow-up" style="opacity:0.5;"></i> → <strong>"Add to Home Screen"</strong>.</div>
-            </div>
-            <div class="guide-step">
-                <span class="num">3</span>
-                <div class="text"><strong>Desktop (Chrome/Edge):</strong> Click the install icon in the address bar or use the <strong>INSTALL</strong> button above.</div>
-            </div>
-            <div class="guide-step">
-                <span class="num">4</span>
-                <div class="text">If you don't see the option, ensure you're on <strong>HTTPS or localhost</strong>. Try <code style="background:rgba(255,255,255,0.05);padding:2px 8px;border-radius:4px;">npx serve</code> to serve this folder.</div>
-            </div>
-
-            <div class="guide-status" id="guideStatus">
-                <i class="fas fa-circle-info"></i> Checking installation readiness...
-            </div>
-        </div>
-    </div>
-
     <!-- SHORTCUTS HELP OVERLAY -->
     <div class="shortcuts-overlay" id="shortcutsOverlay">
         <div class="shortcuts-panel">
@@ -1196,14 +1099,38 @@
             <h2>⌨️ Keyboard Shortcuts</h2>
             <p class="sub">Quick actions for faster workflow</p>
             <div class="shortcuts-grid">
-                <div class="shortcut-item"><span class="action">Open .uasset</span><span class="keys">⌘O</span></div>
-                <div class="shortcut-item"><span class="action">Load skins.txt</span><span class="keys">⇧⌘L</span></div>
-                <div class="shortcut-item"><span class="action">Focus search</span><span class="keys">⌘F</span></div>
-                <div class="shortcut-item"><span class="action">Find / search</span><span class="keys">↵</span></div>
-                <div class="shortcut-item"><span class="action">Copy results</span><span class="keys">⇧⌘C</span></div>
-                <div class="shortcut-item"><span class="action">Save results</span><span class="keys">⇧⌘S</span></div>
-                <div class="shortcut-item"><span class="action">Clear search / reset</span><span class="keys">ESC</span></div>
-                <div class="shortcut-item"><span class="action">Toggle shortcuts help</span><span class="keys">?</span></div>
+                <div class="shortcut-item">
+                    <span class="action">Open .uasset</span>
+                    <span class="keys">⌘O</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="action">Load skins.txt</span>
+                    <span class="keys">⇧⌘L</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="action">Focus search</span>
+                    <span class="keys">⌘F</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="action">Find / search</span>
+                    <span class="keys">↵</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="action">Copy results</span>
+                    <span class="keys">⇧⌘C</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="action">Save results</span>
+                    <span class="keys">⇧⌘S</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="action">Clear search / reset</span>
+                    <span class="keys">ESC</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="action">Toggle shortcuts help</span>
+                    <span class="keys">?</span>
+                </div>
             </div>
             <div style="margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;align-items:center;">
                 <span style="color:rgba(255,255,255,0.15);font-size:12px;">BIZAPRO · SKIN TOOL</span>
@@ -1214,8 +1141,8 @@
 
     <script>
         // ================================================================
-        //  BIZAPRO · GLASS FINDER  –  INSTALL HELP + DIAGNOSTICS
-        //  Uses bizapro.png for icons, auto-loads Item.uasset & skin.txt
+        //  BIZAPRO · GLASS FINDER  –  FIXED INSTALL + DIAGNOSTICS
+        //  Uses bizapro.png, auto-loads Item.uasset & skin.txt
         // ================================================================
 
         (function() {
@@ -1243,11 +1170,12 @@
             const installBanner = document.getElementById('installBanner');
             const installBtn = document.getElementById('installBtn');
             const dismissInstallBtn = document.getElementById('dismissInstallBtn');
-            const httpsWarning = document.getElementById('httpsWarning');
-            const guideBtn = document.getElementById('guideBtn');
-            const guideOverlay = document.getElementById('guideOverlay');
-            const guideClose = document.getElementById('guideClose');
-            const guideStatus = document.getElementById('guideStatus');
+            const diagnosticBox = document.getElementById('diagnosticBox');
+            const diagProtocol = document.getElementById('diagProtocol');
+            const diagManifest = document.getElementById('diagManifest');
+            const diagSW = document.getElementById('diagSW');
+            const diagInstall = document.getElementById('diagInstall');
+            const diagInstruction = document.getElementById('diagInstruction');
 
             // ----- state -----
             let fileData = null;
@@ -1256,27 +1184,61 @@
             let skinsLoaded = false;
             let currentResults = [];
             let deferredPrompt = null;
+            let manifestRegistered = false;
+            let swRegistered = false;
 
             // ============================================================
-            //  HTTPS / SECURITY CHECK
+            //  DIAGNOSTICS
             // ============================================================
 
-            function checkHttps() {
-                const isSecure = window.location.protocol === 'https:' ||
+            function updateDiagnostics() {
+                const protocol = window.location.protocol;
+                const isSecure = protocol === 'https:' ||
                     window.location.hostname === 'localhost' ||
                     window.location.hostname === '127.0.0.1' ||
                     window.location.hostname === '[::1]';
-                if (!isSecure) {
-                    httpsWarning.classList.add('show');
-                    console.warn('⚠️ Not served over HTTPS — installation will not work.');
+
+                diagProtocol.textContent = protocol;
+                diagProtocol.className = 'value ' + (isSecure ? 'ok' : 'err');
+
+                diagManifest.textContent = manifestRegistered ? '✅ registered' : '❌ not registered';
+                diagManifest.className = 'value ' + (manifestRegistered ? 'ok' : 'err');
+
+                diagSW.textContent = swRegistered ? '✅ registered' : '❌ not registered';
+                diagSW.className = 'value ' + (swRegistered ? 'ok' : 'err');
+
+                if (deferredPrompt) {
+                    diagInstall.textContent = '✅ available';
+                    diagInstall.className = 'value ok';
                 } else {
-                    httpsWarning.classList.remove('show');
+                    diagInstall.textContent = isSecure ? '⏳ waiting...' : '🔒 HTTPS required';
+                    diagInstall.className = 'value ' + (isSecure ? 'warn' : 'err');
                 }
-                return isSecure;
+
+                // Show instruction if not secure
+                if (!isSecure) {
+                    diagInstruction.innerHTML = `
+                            <i class="fas fa-lightbulb" style="opacity:0.4;"></i>
+                            <span>To install, serve this page over <strong>HTTPS</strong> or <strong>localhost</strong>.</span>
+                            <span>Try: <code>npx serve .</code> or <code>python -m http.server</code></span>
+                        `;
+                } else if (!deferredPrompt) {
+                    diagInstruction.innerHTML = `
+                            <i class="fas fa-clock" style="opacity:0.4;"></i>
+                            <span>Install prompt may appear soon. If not, use browser's "Add to Home Screen".</span>
+                        `;
+                } else {
+                    diagInstruction.innerHTML = `
+                            <i class="fas fa-check-circle" style="color:#4ade80;opacity:0.7;"></i>
+                            <span>Your browser supports installation! Click the INSTALL button above.</span>
+                        `;
+                }
+
+                diagnosticBox.classList.add('show');
             }
 
             // ============================================================
-            //  MANIFEST (uses bizapro.png)
+            //  MANIFEST (data URI)
             // ============================================================
 
             function buildManifest() {
@@ -1287,6 +1249,7 @@
                     type: 'image/png',
                     purpose: 'any maskable'
                 }));
+
                 return {
                     name: 'BIZAPRO Skin Tool',
                     short_name: 'BIZAPRO Skin',
@@ -1306,64 +1269,82 @@
                 try {
                     const manifest = buildManifest();
                     const json = JSON.stringify(manifest);
-                    const blob = new Blob([json], { type: 'application/json' });
-                    const url = URL.createObjectURL(blob);
+                    // Use data URI to avoid blob URL issues
+                    const base64 = btoa(unescape(encodeURIComponent(json)));
+                    const dataUri = 'data:application/json;base64,' + base64;
                     const link = document.getElementById('manifestLink');
-                    link.href = url;
-                    console.log('✅ Manifest registered with bizapro.png');
+                    link.href = dataUri;
+                    manifestRegistered = true;
+                    console.log('✅ Manifest registered as data URI');
                     return true;
                 } catch (e) {
                     console.warn('Manifest registration failed:', e);
+                    manifestRegistered = false;
                     return false;
                 }
             }
 
             // ============================================================
-            //  SERVICE WORKER
+            //  SERVICE WORKER (inline blob – fallback)
             // ============================================================
 
             function registerServiceWorker() {
                 if (!('serviceWorker' in navigator)) {
                     console.warn('Service workers not supported');
+                    swRegistered = false;
                     return false;
                 }
+
                 try {
+                    // Try to register a service worker from a blob URL
                     const swCode = `
-                            self.addEventListener('install', e => e.waitUntil(self.skipWaiting()));
-                            self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
+                            self.addEventListener('install', e => {
+                                e.waitUntil(self.skipWaiting());
+                            });
+                            self.addEventListener('activate', e => {
+                                e.waitUntil(self.clients.claim());
+                            });
                             self.addEventListener('fetch', e => {
-                                e.respondWith(fetch(e.request).catch(() => new Response('Offline', { status: 503 })));
+                                e.respondWith(fetch(e.request).catch(() => {
+                                    return new Response('Offline', { status: 503 });
+                                }));
                             });
                         `;
                     const blob = new Blob([swCode], { type: 'application/javascript' });
                     const swUrl = URL.createObjectURL(blob);
+
                     navigator.serviceWorker.register(swUrl, { scope: '/' })
-                        .then(() => console.log('✅ Service worker registered'))
-                        .catch(err => console.warn('SW registration failed:', err));
+                        .then(reg => {
+                            console.log('✅ Service worker registered');
+                            swRegistered = true;
+                            updateDiagnostics();
+                            return true;
+                        })
+                        .catch(err => {
+                            console.warn('SW registration failed:', err);
+                            swRegistered = false;
+                            updateDiagnostics();
+                            return false;
+                        });
                     return true;
                 } catch (e) {
                     console.warn('Service worker setup failed:', e);
+                    swRegistered = false;
                     return false;
                 }
             }
 
             // ============================================================
-            //  INSTALL PROMPT + GUIDE
+            //  PWA INSTALL PROMPT
             // ============================================================
 
             function setupInstallPrompt() {
-                const isSecure = checkHttps();
-
                 window.addEventListener('beforeinstallprompt', (e) => {
                     e.preventDefault();
                     deferredPrompt = e;
-                    if (isSecure) {
-                        installBanner.classList.add('show');
-                        console.log('📱 Install prompt available');
-                    } else {
-                        httpsWarning.classList.add('show');
-                    }
-                    updateGuideStatus();
+                    installBanner.classList.add('show');
+                    console.log('📱 Install prompt available');
+                    updateDiagnostics();
                 });
 
                 window.addEventListener('appinstalled', () => {
@@ -1371,7 +1352,7 @@
                     deferredPrompt = null;
                     console.log('✅ App installed');
                     setStatus('installed ✓', true);
-                    updateGuideStatus();
+                    updateDiagnostics();
                 });
 
                 installBtn.addEventListener('click', async () => {
@@ -1385,9 +1366,11 @@
                                 console.log('❌ User declined install');
                             }
                             deferredPrompt = null;
+                            updateDiagnostics();
                         } catch (err) {
                             console.warn('Install prompt error:', err);
-                            if (!checkHttps()) {
+                            if (!window.location.protocol.startsWith('https') &&
+                                window.location.hostname !== 'localhost') {
                                 alert(
                                     '🔒 HTTPS required for installation.\n\n' +
                                     'Please serve this page over HTTPS or localhost.\n' +
@@ -1398,15 +1381,15 @@
                             }
                         }
                     } else {
-                        if (!checkHttps()) {
+                        if (!window.location.protocol.startsWith('https') &&
+                            window.location.hostname !== 'localhost') {
                             alert(
                                 '🔒 HTTPS required for installation.\n\n' +
                                 'Please serve this page over HTTPS or localhost.\n' +
                                 'Try: npx serve .  or  python -m http.server'
                             );
                         } else {
-                            // Show guide
-                            showGuide();
+                            alert('To install, use your browser\'s "Add to Home Screen" option.');
                         }
                     }
                 });
@@ -1414,45 +1397,6 @@
                 dismissInstallBtn.addEventListener('click', () => {
                     installBanner.classList.remove('show');
                 });
-
-                // Guide buttons
-                guideBtn.addEventListener('click', showGuide);
-                guideClose.addEventListener('click', hideGuide);
-                guideOverlay.addEventListener('click', (e) => {
-                    if (e.target === guideOverlay) hideGuide();
-                });
-            }
-
-            function showGuide() {
-                guideOverlay.classList.add('active');
-                updateGuideStatus();
-            }
-
-            function hideGuide() {
-                guideOverlay.classList.remove('active');
-            }
-
-            function updateGuideStatus() {
-                const isSecure = checkHttps();
-                const hasPrompt = !!deferredPrompt;
-                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-                const isAndroid = /Android/.test(navigator.userAgent);
-                let statusHtml = '';
-
-                if (isSecure && hasPrompt) {
-                    statusHtml = `<span class="ok">✅ Ready to install — tap the INSTALL button above.</span>`;
-                } else if (isSecure && !hasPrompt) {
-                    if (isIOS) {
-                        statusHtml = `<span class="ok">📱 iOS detected: use the share icon <i class="fas fa-square-arrow-up"></i> → "Add to Home Screen".</span>`;
-                    } else if (isAndroid) {
-                        statusHtml = `<span class="ok">📱 Android detected: use the browser menu <i class="fas fa-ellipsis-v"></i> → "Add to Home screen".</span>`;
-                    } else {
-                        statusHtml = `<span class="ok">💻 Desktop: use the install icon in the address bar or the INSTALL button.</span>`;
-                    }
-                } else {
-                    statusHtml = `<span class="fail">⚠️ Not served over HTTPS. Serve using <code style="background:rgba(255,255,255,0.05);padding:2px 8px;border-radius:4px;">npx serve</code> or a secure server.</span>`;
-                }
-                guideStatus.innerHTML = '<i class="fas fa-circle-info"></i> ' + statusHtml;
             }
 
             // ============================================================
@@ -1496,7 +1440,9 @@
                     `;
                 resultBox.innerHTML = '';
                 const existing = resultBox.querySelector('.result-placeholder');
-                if (!existing) resultBox.appendChild(placeholder);
+                if (!existing) {
+                    resultBox.appendChild(placeholder);
+                }
                 resultCount.textContent = '0 results';
                 currentResults = [];
             }
@@ -1504,10 +1450,12 @@
             function showResults(lines) {
                 const ph = resultBox.querySelector('.result-placeholder');
                 if (ph) ph.remove();
+
                 if (lines.length === 0) {
                     setPlaceholder('No matches found', 'fa-search');
                     return;
                 }
+
                 let html = '';
                 for (const line of lines) {
                     html += `<div class="result-line">${line}</div>`;
@@ -1742,7 +1690,8 @@
                 navigator.clipboard.writeText(text).then(() => {
                     copyBtn.innerHTML = '<i class="fas fa-check"></i> COPIED';
                     setTimeout(() => {
-                        copyBtn.innerHTML = '<i class="fas fa-copy"></i> COPY <span class="shortcut-hint">⇧⌘C</span>';
+                        copyBtn.innerHTML =
+                            '<i class="fas fa-copy"></i> COPY <span class="shortcut-hint">⇧⌘C</span>';
                     }, 1500);
                 }).catch(() => {
                     const ta = document.createElement('textarea');
@@ -1753,7 +1702,8 @@
                     ta.remove();
                     copyBtn.innerHTML = '<i class="fas fa-check"></i> COPIED';
                     setTimeout(() => {
-                        copyBtn.innerHTML = '<i class="fas fa-copy"></i> COPY <span class="shortcut-hint">⇧⌘C</span>';
+                        copyBtn.innerHTML =
+                            '<i class="fas fa-copy"></i> COPY <span class="shortcut-hint">⇧⌘C</span>';
                     }, 1500);
                 });
             }
@@ -1776,7 +1726,8 @@
                 URL.revokeObjectURL(url);
                 saveBtn.innerHTML = '<i class="fas fa-check"></i> SAVED';
                 setTimeout(() => {
-                    saveBtn.innerHTML = '<i class="fas fa-save"></i> SAVE TXT <span class="shortcut-hint">⇧⌘S</span>';
+                    saveBtn.innerHTML =
+                        '<i class="fas fa-save"></i> SAVE TXT <span class="shortcut-hint">⇧⌘S</span>';
                 }, 1500);
             }
 
@@ -1815,6 +1766,7 @@
                 registerManifest();
                 registerServiceWorker();
                 setupInstallPrompt();
+                updateDiagnostics();
 
                 // --- File inputs ---
                 openBtn.addEventListener('click', () => uassetInput.click());
@@ -1873,11 +1825,6 @@
                         if (shortcutsOverlay.classList.contains('active')) {
                             e.preventDefault();
                             toggleShortcuts(false);
-                            return;
-                        }
-                        if (guideOverlay.classList.contains('active')) {
-                            e.preventDefault();
-                            hideGuide();
                             return;
                         }
                         if (isSearchFocused && searchInput.value.length > 0) {
@@ -1970,10 +1917,7 @@
                 // --- AUTO-LOAD ---
                 await autoLoadFiles();
 
-                // Update guide status after everything
-                setTimeout(updateGuideStatus, 500);
-
-                console.log('⚔️ BIZAPRO · SKIN TOOL  |  Install help added  |  Shortcuts: ? for help');
+                console.log('⚔️ BIZAPRO · SKIN TOOL  |  PWA with diagnostics  |  Shortcuts: ? for help');
             }
 
             // --- Run ---
