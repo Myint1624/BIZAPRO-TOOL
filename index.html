@@ -13,12 +13,8 @@
     <meta name="theme-color" content="#05030f" />
     <meta name="msapplication-TileColor" content="#05030f" />
 
-    <!-- Manifest will be injected as data URI -->
     <link id="manifestLink" rel="manifest" href="#" />
-
-    <!-- Icons: use bizapro.png -->
-    <link rel="shortcut icon" href="bizapro.png" type="image/png" />
-    <link rel="apple-touch-icon" href="bizapro.png" />
+    <link rel="shortcut icon" href="./bizapro.ico" />
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -40,8 +36,310 @@
             background: radial-gradient(ellipse at 20% 50%, #0d0b1e, #05030f 80%);
             padding: 20px;
             overscroll-behavior: none;
+            overflow: hidden;
         }
 
+        /* ============================================================
+               INTRO OVERLAY
+            ============================================================ */
+        #introOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+            background: radial-gradient(ellipse at 30% 40%, #12102a, #05030f 85%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.9s cubic-bezier(0.65, 0, 0.35, 1), visibility 0.9s ease;
+            will-change: opacity, visibility;
+        }
+
+        #introOverlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* subtle animated background glow */
+        #introOverlay::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -30%;
+            width: 160%;
+            height: 160%;
+            background: radial-gradient(ellipse at 30% 30%, rgba(120, 180, 255, 0.04), transparent 70%);
+            animation: introGlow 8s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes introGlow {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate(8%, 6%) scale(1.15);
+                opacity: 1;
+            }
+        }
+
+        .intro-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 32px;
+            max-width: 480px;
+            width: 100%;
+        }
+
+        /* logo ring */
+        .intro-logo-wrapper {
+            position: relative;
+            margin-bottom: 28px;
+        }
+
+        .intro-logo-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.04);
+            animation: ringSpin 12s linear infinite;
+            pointer-events: none;
+        }
+
+        .intro-logo-ring::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(120, 180, 255, 0.5);
+            box-shadow: 0 0 24px rgba(120, 180, 255, 0.3);
+        }
+
+        .intro-logo-ring::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(120, 180, 255, 0.15);
+        }
+
+        @keyframes ringSpin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .intro-logo {
+            font-size: 72px;
+            color: #fff;
+            filter: drop-shadow(0 0 40px rgba(120, 180, 255, 0.25));
+            animation: introLogoPulse 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        @keyframes introLogoPulse {
+            0%,
+            100% {
+                filter: drop-shadow(0 0 30px rgba(120, 180, 255, 0.2));
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 60px rgba(120, 180, 255, 0.45));
+                transform: scale(1.02);
+            }
+        }
+
+        .intro-title {
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #f0f4ff, #b0caff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 60px rgba(100, 150, 255, 0.08);
+            margin-top: 4px;
+            line-height: 1.1;
+        }
+
+        .intro-subtitle {
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.25);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 2px;
+            margin-bottom: 36px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px 18px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            display: inline-block;
+        }
+
+        /* ---- PROGRESS ---- */
+        .progress-container {
+            width: 100%;
+            max-width: 360px;
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #4a7aff, #8ab4ff, #4a7aff);
+            background-size: 200% 100%;
+            border-radius: 10px;
+            transition: width 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+            animation: shimmerProgress 1.8s ease-in-out infinite;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            animation: shimmerSweep 2s ease-in-out infinite;
+            border-radius: 10px;
+        }
+
+        @keyframes shimmerSweep {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        @keyframes shimmerProgress {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .progress-text {
+            display: block;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px;
+            font-weight: 450;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.5px;
+            margin-top: 12px;
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+        }
+
+        .loading-status {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            margin-top: 4px;
+            min-height: 24px;
+            transition: opacity 0.3s ease;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        /* ---- version tag ---- */
+        .intro-version {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.06);
+            font-size: 11px;
+            font-family: monospace;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* ---- dots animation ---- */
+        .loading-dots::after {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            text-align: left;
+            animation: dotsAnim 1.4s steps(4, end) infinite;
+        }
+
+        @keyframes dotsAnim {
+            0% {
+                content: '';
+            }
+            25% {
+                content: '.';
+            }
+            50% {
+                content: '..';
+            }
+            75% {
+                content: '...';
+            }
+            100% {
+                content: '';
+            }
+        }
+
+        /* ============================================================
+               MAIN APP — same as before, slightly adjusted
+            ============================================================ */
         .glass-container {
             width: 100%;
             max-width: 1280px;
@@ -54,6 +352,27 @@
             padding: 40px 44px 48px;
             transition: all 0.3s ease;
             position: relative;
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            animation: appReveal 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+            animation-delay: 0.3s;
+        }
+
+        @keyframes appReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ensure intro hides after reveal */
+        #introOverlay.hidden~.glass-container {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
 
         .glass-container::before {
@@ -68,6 +387,7 @@
             pointer-events: none;
         }
 
+        /* ---------- HEADER ---------- */
         .header {
             display: flex;
             align-items: center;
@@ -153,6 +473,7 @@
             }
         }
 
+        /* ---------- BUTTON ROW ---------- */
         .actions {
             display: flex;
             flex-wrap: wrap;
@@ -417,89 +738,36 @@
             font-size: 14px;
         }
 
-        /* ---------- HTTPS / DIAGNOSTIC WARNING ---------- */
-        .diagnostic-box {
+        /* ---------- HTTPS WARNING ---------- */
+        .https-warning {
             display: none;
-            background: rgba(255, 200, 100, 0.06);
-            border: 1px solid rgba(255, 200, 100, 0.15);
+            background: rgba(248, 113, 113, 0.08);
+            border: 1px solid rgba(248, 113, 113, 0.15);
             border-radius: 16px;
-            padding: 14px 20px;
+            padding: 12px 20px;
             margin-bottom: 20px;
-            color: rgba(255, 220, 180, 0.8);
+            color: rgba(255, 200, 200, 0.7);
             font-size: 13px;
-            align-items: flex-start;
-            gap: 14px;
-            flex-direction: column;
-        }
-
-        .diagnostic-box.show {
-            display: flex;
-        }
-
-        .diagnostic-box .diag-row {
-            display: flex;
             align-items: center;
             gap: 12px;
-            width: 100%;
-            flex-wrap: wrap;
         }
 
-        .diagnostic-box .diag-row i {
-            font-size: 18px;
-            width: 24px;
-            text-align: center;
-        }
-
-        .diagnostic-box .diag-row .label {
-            color: rgba(255, 255, 255, 0.4);
-            font-weight: 400;
-            min-width: 120px;
-        }
-
-        .diagnostic-box .diag-row .value {
-            color: rgba(255, 255, 255, 0.8);
-            font-family: monospace;
-            font-size: 12px;
-            background: rgba(255, 255, 255, 0.04);
-            padding: 2px 12px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .diagnostic-box .diag-row .value.ok {
-            color: #4ade80;
-            border-color: rgba(74, 222, 128, 0.15);
-        }
-
-        .diagnostic-box .diag-row .value.err {
-            color: #f87171;
-            border-color: rgba(248, 113, 113, 0.15);
-        }
-
-        .diagnostic-box .diag-row .value.warn {
-            color: #fbbf24;
-            border-color: rgba(251, 191, 36, 0.15);
-        }
-
-        .diagnostic-box .instruction {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 12px;
-            padding: 8px 0 4px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            width: 100%;
+        .https-warning.show {
             display: flex;
-            flex-wrap: wrap;
-            gap: 6px 12px;
         }
 
-        .diagnostic-box .instruction code {
+        .https-warning i {
+            color: #f87171;
+            font-size: 18px;
+        }
+
+        .https-warning code {
             background: rgba(255, 255, 255, 0.05);
-            padding: 2px 12px;
-            border-radius: 12px;
+            padding: 2px 10px;
+            border-radius: 6px;
             font-family: monospace;
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.4);
         }
 
         /* ---------- RESULT BOX ---------- */
@@ -861,9 +1129,21 @@
                 padding: 6px 14px;
                 font-size: 12px;
             }
-            .diagnostic-box {
+            .https-warning {
                 font-size: 12px;
-                padding: 12px 16px;
+                padding: 10px 16px;
+            }
+            .intro-title {
+                font-size: 30px;
+            }
+            .intro-logo {
+                font-size: 54px;
+                width: 96px;
+                height: 96px;
+            }
+            .intro-logo-ring {
+                width: 112px;
+                height: 112px;
             }
         }
 
@@ -939,19 +1219,65 @@
             .install-banner .actions {
                 justify-content: center;
             }
-            .diagnostic-box .diag-row {
+            .https-warning {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 4px;
+                text-align: center;
+                gap: 6px;
             }
-            .diagnostic-box .diag-row .label {
-                min-width: auto;
+            .intro-title {
+                font-size: 26px;
+            }
+            .intro-logo {
+                font-size: 44px;
+                width: 80px;
+                height: 80px;
+            }
+            .intro-logo-ring {
+                width: 96px;
+                height: 96px;
+            }
+            .intro-subtitle {
+                font-size: 11px;
+                letter-spacing: 3px;
+                padding: 3px 14px;
+            }
+            .progress-container {
+                max-width: 280px;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- ============================================================
+    INTRO OVERLAY
+    ============================================================ -->
+    <div id="introOverlay">
+        <div class="intro-content">
+            <div class="intro-logo-wrapper">
+                <div class="intro-logo-ring"></div>
+                <div class="intro-logo">
+                    <i class="fa-brands fa-d-and-d"></i>
+                </div>
+            </div>
+            <h1 class="intro-title">BIZAPRO</h1>
+            <span class="intro-subtitle">SKIN TOOL</span>
+
+            <div class="progress-container">
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">0%</span>
+            </div>
+
+            <p class="loading-status" id="loadingStatus">Initializing…</p>
+        </div>
+        <div class="intro-version">v2.2 · PWA</div>
+    </div>
+
+    <!-- ============================================================
+    MAIN APP
+    ============================================================ -->
     <div class="glass-container">
 
         <!-- HEADER -->
@@ -967,40 +1293,21 @@
             </div>
         </div>
 
-        <!-- DIAGNOSTIC / INSTALL HELP -->
-        <div class="diagnostic-box" id="diagnosticBox">
-            <div class="diag-row">
-                <i class="fas fa-globe"></i>
-                <span class="label">Protocol</span>
-                <span class="value" id="diagProtocol">-</span>
-            </div>
-            <div class="diag-row">
-                <i class="fas fa-check-circle"></i>
-                <span class="label">Manifest</span>
-                <span class="value" id="diagManifest">-</span>
-            </div>
-            <div class="diag-row">
-                <i class="fas fa-cogs"></i>
-                <span class="label">Service Worker</span>
-                <span class="value" id="diagSW">-</span>
-            </div>
-            <div class="diag-row">
-                <i class="fas fa-download"></i>
-                <span class="label">Install Prompt</span>
-                <span class="value" id="diagInstall">-</span>
-            </div>
-            <div class="instruction" id="diagInstruction">
-                <i class="fas fa-lightbulb" style="opacity:0.4;"></i>
-                <span>For installation, serve this page over <strong>HTTPS</strong> or <strong>localhost</strong>.</span>
-                <span>Try: <code>npx serve .</code> or <code>python -m http.server</code></span>
-            </div>
+        <!-- HTTPS WARNING -->
+        <div class="https-warning" id="httpsWarning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>
+                <strong>HTTPS required for installation.</strong>
+                To install this app, serve it over HTTPS or localhost.
+                <span style="opacity:0.4;margin-left:8px;">(or use a local server like <code>npx serve</code>)</span>
+            </span>
         </div>
 
         <!-- INSTALL BANNER -->
         <div class="install-banner" id="installBanner">
             <span class="msg">
                 <i class="fas fa-mobile-alt"></i>
-                Install BIZAPRO Skin Tool on your device
+                Install BIZAPRO SKIN TOOL on your device
             </span>
             <div class="actions">
                 <button class="glass-btn primary" id="installBtn">
@@ -1016,11 +1323,9 @@
         <div class="actions">
             <button class="glass-btn primary" id="openBtn">
                 <i class="fas fa-folder-open"></i> OPEN UASSET
-                <span class="shortcut-hint">⌘O</span>
             </button>
             <button class="glass-btn" id="loadSkinsBtn">
                 <i class="fas fa-list-ul"></i> LOAD SKINS.TXT
-                <span class="shortcut-hint">⇧⌘L</span>
             </button>
             <span class="file-label" id="fileLabel">
                 <i class="fas fa-file"></i> No file
@@ -1037,8 +1342,7 @@
         <div class="search-section">
             <div class="search-row">
                 <label for="searchInput">
-                    <i class="fas fa-search"></i> ID / Name
-                    <span class="shortcut-hint">⌘F</span>
+                    <i class="fas fa-search"></i>SKIN ID / Name
                 </label>
                 <input
                 type="text"
@@ -1050,7 +1354,6 @@
                 />
                 <button class="search-btn" id="findBtn">
                     <i class="fas fa-arrow-right"></i> FIND
-                    <span class="shortcut-hint">↵</span>
                 </button>
             </div>
         </div>
@@ -1071,15 +1374,12 @@
             <div class="toolbar-left">
                 <button class="toolbar-btn" id="copyBtn">
                     <i class="fas fa-copy"></i> COPY
-                    <span class="shortcut-hint">⇧⌘C</span>
                 </button>
                 <button class="toolbar-btn" id="saveBtn">
                     <i class="fas fa-save"></i> SAVE TXT
-                    <span class="shortcut-hint">⇧⌘S</span>
                 </button>
                 <button class="toolbar-btn" id="clearBtn">
                     <i class="fas fa-eraser"></i> CLEAR
-                    <span class="shortcut-hint">ESC</span>
                 </button>
             </div>
             <div class="toolbar-right">
@@ -1101,27 +1401,27 @@
             <div class="shortcuts-grid">
                 <div class="shortcut-item">
                     <span class="action">Open .uasset</span>
-                    <span class="keys">⌘O</span>
+                    <span class="keys">Ctrl + O</span>
                 </div>
                 <div class="shortcut-item">
                     <span class="action">Load skins.txt</span>
-                    <span class="keys">⇧⌘L</span>
+                    <span class="keys">Ctrl + L</span>
                 </div>
                 <div class="shortcut-item">
                     <span class="action">Focus search</span>
-                    <span class="keys">⌘F</span>
+                    <span class="keys">Ctrl + F</span>
                 </div>
                 <div class="shortcut-item">
                     <span class="action">Find / search</span>
-                    <span class="keys">↵</span>
+                    <span class="keys">Enter ↵</span>
                 </div>
                 <div class="shortcut-item">
                     <span class="action">Copy results</span>
-                    <span class="keys">⇧⌘C</span>
+                    <span class="keys">Ctrl + C</span>
                 </div>
                 <div class="shortcut-item">
                     <span class="action">Save results</span>
-                    <span class="keys">⇧⌘S</span>
+                    <span class="keys">Ctrl + S</span>
                 </div>
                 <div class="shortcut-item">
                     <span class="action">Clear search / reset</span>
@@ -1134,21 +1434,27 @@
             </div>
             <div style="margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;align-items:center;">
                 <span style="color:rgba(255,255,255,0.15);font-size:12px;">BIZAPRO · SKIN TOOL</span>
-                <span style="color:rgba(255,255,255,0.08);font-size:11px;font-family:monospace;">v2.4 · PWA</span>
+                <span style="color:rgba(255,255,255,0.08);font-size:11px;font-family:monospace;">v2.2 · PWA</span>
             </div>
         </div>
     </div>
 
     <script>
         // ================================================================
-        //  BIZAPRO · GLASS FINDER  –  FIXED INSTALL + DIAGNOSTICS
-        //  Uses bizapro.png, auto-loads Item.uasset & skin.txt
+        //  BIZAPRO · GLASS FINDER  –  with INTRO + PROGRESS
+        //  + Auto-load Item.uasset & skin.txt
+        //  + Embedded icons (no external files needed)
         // ================================================================
 
         (function() {
             'use strict';
 
             // ----- DOM refs -----
+            const introOverlay = document.getElementById('introOverlay');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const loadingStatus = document.getElementById('loadingStatus');
+
             const openBtn = document.getElementById('openBtn');
             const loadSkinsBtn = document.getElementById('loadSkinsBtn');
             const uassetInput = document.getElementById('uassetInput');
@@ -1170,12 +1476,7 @@
             const installBanner = document.getElementById('installBanner');
             const installBtn = document.getElementById('installBtn');
             const dismissInstallBtn = document.getElementById('dismissInstallBtn');
-            const diagnosticBox = document.getElementById('diagnosticBox');
-            const diagProtocol = document.getElementById('diagProtocol');
-            const diagManifest = document.getElementById('diagManifest');
-            const diagSW = document.getElementById('diagSW');
-            const diagInstall = document.getElementById('diagInstall');
-            const diagInstruction = document.getElementById('diagInstruction');
+            const httpsWarning = document.getElementById('httpsWarning');
 
             // ----- state -----
             let fileData = null;
@@ -1184,75 +1485,145 @@
             let skinsLoaded = false;
             let currentResults = [];
             let deferredPrompt = null;
-            let manifestRegistered = false;
-            let swRegistered = false;
 
             // ============================================================
-            //  DIAGNOSTICS
+            //  INTRO PROGRESS
             // ============================================================
 
-            function updateDiagnostics() {
-                const protocol = window.location.protocol;
-                const isSecure = protocol === 'https:' ||
-                    window.location.hostname === 'localhost' ||
-                    window.location.hostname === '127.0.0.1' ||
-                    window.location.hostname === '[::1]';
+            const statusMessages = [
+                { p: 0, msg: 'Initializing…' },
+                { p: 12, msg: 'Loading assets…' },
+                { p: 25, msg: 'Connecting modules…' },
+                { p: 38, msg: 'Parsing configurations…' },
+                { p: 50, msg: 'Building skin database…' },
+                { p: 62, msg: 'Optimizing search engine…' },
+                { p: 75, msg: 'Preparing UI components…' },
+                { p: 85, msg: 'Finalizing setup…' },
+                { p: 93, msg: 'Almost ready…' },
+                { p: 100, msg: 'Ready to go!' },
+            ];
 
-                diagProtocol.textContent = protocol;
-                diagProtocol.className = 'value ' + (isSecure ? 'ok' : 'err');
-
-                diagManifest.textContent = manifestRegistered ? '✅ registered' : '❌ not registered';
-                diagManifest.className = 'value ' + (manifestRegistered ? 'ok' : 'err');
-
-                diagSW.textContent = swRegistered ? '✅ registered' : '❌ not registered';
-                diagSW.className = 'value ' + (swRegistered ? 'ok' : 'err');
-
-                if (deferredPrompt) {
-                    diagInstall.textContent = '✅ available';
-                    diagInstall.className = 'value ok';
-                } else {
-                    diagInstall.textContent = isSecure ? '⏳ waiting...' : '🔒 HTTPS required';
-                    diagInstall.className = 'value ' + (isSecure ? 'warn' : 'err');
+            function getStatusForProgress(p) {
+                let best = statusMessages[0];
+                for (const item of statusMessages) {
+                    if (p >= item.p) best = item;
                 }
+                return best.msg;
+            }
 
-                // Show instruction if not secure
-                if (!isSecure) {
-                    diagInstruction.innerHTML = `
-                            <i class="fas fa-lightbulb" style="opacity:0.4;"></i>
-                            <span>To install, serve this page over <strong>HTTPS</strong> or <strong>localhost</strong>.</span>
-                            <span>Try: <code>npx serve .</code> or <code>python -m http.server</code></span>
-                        `;
-                } else if (!deferredPrompt) {
-                    diagInstruction.innerHTML = `
-                            <i class="fas fa-clock" style="opacity:0.4;"></i>
-                            <span>Install prompt may appear soon. If not, use browser's "Add to Home Screen".</span>
-                        `;
-                } else {
-                    diagInstruction.innerHTML = `
-                            <i class="fas fa-check-circle" style="color:#4ade80;opacity:0.7;"></i>
-                            <span>Your browser supports installation! Click the INSTALL button above.</span>
-                        `;
-                }
+            function runIntro() {
+                let progress = 0;
+                const step = 0.5 + Math.random() * 1.2;
+                const duration = 2600; // ms to reach 100%
+                const interval = 30;
+                const totalSteps = duration / interval;
+                let stepCount = 0;
 
-                diagnosticBox.classList.add('show');
+                // small random variance to feel organic
+                let baseIncrement = 100 / totalSteps;
+
+                const timer = setInterval(() => {
+                    stepCount++;
+                    // add slight ease-out: slow down near the end
+                    const easeFactor = 1 - (stepCount / totalSteps) * 0.3;
+                    let increment = baseIncrement * (0.7 + 0.6 * Math.random()) * easeFactor;
+                    progress = Math.min(progress + increment, 100);
+
+                    // update UI
+                    const pct = Math.round(progress);
+                    progressFill.style.width = pct + '%';
+                    progressText.textContent = pct + '%';
+                    loadingStatus.textContent = getStatusForProgress(progress);
+
+                    if (progress >= 100) {
+                        clearInterval(timer);
+                        progressFill.style.width = '100%';
+                        progressText.textContent = '100%';
+                        loadingStatus.textContent = 'Ready to go!';
+
+                        // slight delay then hide intro
+                        setTimeout(() => {
+                            introOverlay.classList.add('hidden');
+                            // focus search after intro
+                            setTimeout(() => searchInput.focus(), 400);
+                        }, 500);
+                    }
+                }, interval);
             }
 
             // ============================================================
-            //  MANIFEST (data URI)
+            //  CHECK HTTPS
+            // ============================================================
+
+            function checkHttps() {
+                const isSecure = window.location.protocol === 'https:' ||
+                    window.location.hostname === 'localhost' ||
+                    window.location.hostname === '127.0.0.1' ||
+                    window.location.hostname === '[::1]';
+                if (!isSecure) {
+                    httpsWarning.classList.add('show');
+                    console.warn('⚠️ Not served over HTTPS — installation will not work.');
+                } else {
+                    httpsWarning.classList.remove('show');
+                }
+                return isSecure;
+            }
+
+            // ============================================================
+            //  GENERATE ICON AS DATA URI
+            // ============================================================
+
+            function generateIconDataUri(size, emoji = '⚔️') {
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+
+                const grad = ctx.createRadialGradient(
+                    size * 0.3, size * 0.3, size * 0.1,
+                    size * 0.5, size * 0.5, size * 0.8
+                );
+                grad.addColorStop(0, '#1a1a3e');
+                grad.addColorStop(0.7, '#0d0b1e');
+                grad.addColorStop(1, '#05030f');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, size, size);
+
+                ctx.shadowColor = 'rgba(120,180,255,0.3)';
+                ctx.shadowBlur = size * 0.08;
+
+                ctx.shadowColor = 'rgba(120,180,255,0.4)';
+                ctx.shadowBlur = size * 0.06;
+                ctx.font = `${size * 0.55}px "Segoe UI Emoji", "Apple Color Emoji", system-ui, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText(emoji, size * 0.5, size * 0.52);
+
+                ctx.shadowBlur = 0;
+                ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(2, 2, size - 4, size - 4);
+
+                return canvas.toDataURL('image/png');
+            }
+
+            // ============================================================
+            //  BUILD MANIFEST
             // ============================================================
 
             function buildManifest() {
-                const iconSizes = [72, 96, 128, 144, 152, 192, 384, 512];
-                const icons = iconSizes.map(s => ({
-                    src: 'bizapro.png',
+                const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+                const icons = sizes.map(s => ({
+                    src: generateIconDataUri(s),
                     sizes: `${s}x${s}`,
                     type: 'image/png',
                     purpose: 'any maskable'
                 }));
 
                 return {
-                    name: 'BIZAPRO Skin Tool',
-                    short_name: 'BIZAPRO Skin',
+                    name: 'BIZAPRO SKIN TOOL',
+                    short_name: 'BIZAPRO SKIN TOOL',
                     description: 'Search and extract skin data from .uasset files',
                     start_url: window.location.href.split('?')[0],
                     display: 'standalone',
@@ -1269,34 +1640,29 @@
                 try {
                     const manifest = buildManifest();
                     const json = JSON.stringify(manifest);
-                    // Use data URI to avoid blob URL issues
-                    const base64 = btoa(unescape(encodeURIComponent(json)));
-                    const dataUri = 'data:application/json;base64,' + base64;
+                    const blob = new Blob([json], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
                     const link = document.getElementById('manifestLink');
-                    link.href = dataUri;
-                    manifestRegistered = true;
-                    console.log('✅ Manifest registered as data URI');
+                    link.href = url;
+                    console.log('✅ Manifest registered with embedded icons');
                     return true;
                 } catch (e) {
                     console.warn('Manifest registration failed:', e);
-                    manifestRegistered = false;
                     return false;
                 }
             }
 
             // ============================================================
-            //  SERVICE WORKER (inline blob – fallback)
+            //  SERVICE WORKER
             // ============================================================
 
             function registerServiceWorker() {
                 if (!('serviceWorker' in navigator)) {
                     console.warn('Service workers not supported');
-                    swRegistered = false;
                     return false;
                 }
 
                 try {
-                    // Try to register a service worker from a blob URL
                     const swCode = `
                             self.addEventListener('install', e => {
                                 e.waitUntil(self.skipWaiting());
@@ -1316,20 +1682,15 @@
                     navigator.serviceWorker.register(swUrl, { scope: '/' })
                         .then(reg => {
                             console.log('✅ Service worker registered');
-                            swRegistered = true;
-                            updateDiagnostics();
                             return true;
                         })
                         .catch(err => {
                             console.warn('SW registration failed:', err);
-                            swRegistered = false;
-                            updateDiagnostics();
                             return false;
                         });
                     return true;
                 } catch (e) {
                     console.warn('Service worker setup failed:', e);
-                    swRegistered = false;
                     return false;
                 }
             }
@@ -1339,12 +1700,17 @@
             // ============================================================
 
             function setupInstallPrompt() {
+                const isSecure = checkHttps();
+
                 window.addEventListener('beforeinstallprompt', (e) => {
                     e.preventDefault();
                     deferredPrompt = e;
-                    installBanner.classList.add('show');
-                    console.log('📱 Install prompt available');
-                    updateDiagnostics();
+                    if (isSecure) {
+                        installBanner.classList.add('show');
+                        console.log('📱 Install prompt available');
+                    } else {
+                        httpsWarning.classList.add('show');
+                    }
                 });
 
                 window.addEventListener('appinstalled', () => {
@@ -1352,7 +1718,6 @@
                     deferredPrompt = null;
                     console.log('✅ App installed');
                     setStatus('installed ✓', true);
-                    updateDiagnostics();
                 });
 
                 installBtn.addEventListener('click', async () => {
@@ -1366,11 +1731,9 @@
                                 console.log('❌ User declined install');
                             }
                             deferredPrompt = null;
-                            updateDiagnostics();
                         } catch (err) {
                             console.warn('Install prompt error:', err);
-                            if (!window.location.protocol.startsWith('https') &&
-                                window.location.hostname !== 'localhost') {
+                            if (!checkHttps()) {
                                 alert(
                                     '🔒 HTTPS required for installation.\n\n' +
                                     'Please serve this page over HTTPS or localhost.\n' +
@@ -1381,8 +1744,7 @@
                             }
                         }
                     } else {
-                        if (!window.location.protocol.startsWith('https') &&
-                            window.location.hostname !== 'localhost') {
+                        if (!checkHttps()) {
                             alert(
                                 '🔒 HTTPS required for installation.\n\n' +
                                 'Please serve this page over HTTPS or localhost.\n' +
@@ -1540,7 +1902,7 @@
                         const arrayBuffer = await uassetResp.arrayBuffer();
                         fileData = new Uint8Array(arrayBuffer);
                         fileLoaded = true;
-                        fileLabel.innerHTML = `<i class="fas fa-check-circle"></i> Item.uasset (auto)`;
+                        fileLabel.innerHTML = `<i class="fas fa-check-circle"></i> Item.uasset`;
                         fileLabel.classList.add('loaded');
                         setStatus('uasset auto-loaded', true);
                         setPlaceholder('✅ Item.uasset loaded — enter a skin ID or name', 'fa-check-circle');
@@ -1570,7 +1932,7 @@
                             }
                         }
                         skinsLoaded = true;
-                        skinLabel.innerHTML = `<i class="fas fa-database"></i> ${count} skins (skin.txt auto)`;
+                        skinLabel.innerHTML = `<i class="fas fa-database"></i> ${count} skins`;
                         skinLabel.classList.add('loaded');
                         setStatus(`${count} skins auto-loaded`, true);
                         setPlaceholder(`✅ ${count} skins loaded — enter a skin ID or name`, 'fa-check-circle');
@@ -1766,7 +2128,6 @@
                 registerManifest();
                 registerServiceWorker();
                 setupInstallPrompt();
-                updateDiagnostics();
 
                 // --- File inputs ---
                 openBtn.addEventListener('click', () => uassetInput.click());
@@ -1914,18 +2275,28 @@
                     }
                 });
 
-                // --- AUTO-LOAD ---
+                // --- AUTO-LOAD (after intro, but we run it in background) ---
                 await autoLoadFiles();
 
-                console.log('⚔️ BIZAPRO · SKIN TOOL  |  PWA with diagnostics  |  Shortcuts: ? for help');
+                console.log('BIZAPRO · SKIN TOOL  |  PWA fixed  |  Shortcuts: ? for help');
             }
 
-            // --- Run ---
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', init);
-            } else {
-                init();
-            }
+            // ============================================================
+            //  LAUNCH: run intro, then init app
+            // ============================================================
+
+            // Start the intro animation
+            runIntro();
+
+            // Initialize app in parallel (but don't block intro)
+            // We delay init slightly so the intro can breathe
+            setTimeout(() => {
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', init);
+                } else {
+                    init();
+                }
+            }, 200);
 
         })();
     </script>
