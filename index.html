@@ -315,7 +315,7 @@
         .glass-container {
             width: 100%;
             max-width: 1280px;
-            height: 100vh;          /* fill viewport */
+            height: 100vh;
             max-height: 100vh;
             background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(24px);
@@ -332,7 +332,7 @@
             animation-delay: 0.3s;
             display: flex;
             flex-direction: column;
-            overflow: hidden;        /* no scroll on container */
+            overflow: hidden;
         }
 
         @keyframes appReveal {
@@ -363,7 +363,7 @@
             pointer-events: none;
         }
 
-        /* ---------- HEADER (Centered) ---------- */
+        /* ---------- HEADER (Centered, Big Logo) ---------- */
         .header {
             display: flex;
             flex-direction: column;
@@ -380,15 +380,16 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            gap: 2px;
+            gap: 4px;
         }
 
         .brand-icon {
-            font-size: 34px;
+            font-size: 48px; /* Bigger base size */
             color: #fff;
-            filter: drop-shadow(0 0 20px rgba(120, 180, 255, 0.3));
+            filter: drop-shadow(0 0 25px rgba(120, 180, 255, 0.35));
             animation: glowPulse 4s ease-in-out infinite;
             margin-bottom: 2px;
+            line-height: 1;
         }
 
         @keyframes glowPulse {
@@ -397,7 +398,7 @@
                 filter: drop-shadow(0 0 20px rgba(120, 180, 255, 0.25));
             }
             50% {
-                filter: drop-shadow(0 0 40px rgba(120, 180, 255, 0.55));
+                filter: drop-shadow(0 0 50px rgba(120, 180, 255, 0.65));
             }
         }
 
@@ -763,8 +764,8 @@
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.04);
             padding: 4px;
-            flex: 1;                 /* takes remaining space */
-            min-height: 0;           /* flex override */
+            flex: 1;
+            min-height: 0;
             display: flex;
             flex-direction: column;
             margin-bottom: 10px;
@@ -780,7 +781,7 @@
             font-family: 'JetBrains Mono', 'Consolas', monospace;
             font-size: 11px;
             line-height: 1.5;
-            overflow-y: auto;        /* only this scrolls */
+            overflow-y: auto;
             border: none;
             resize: none;
             outline: none;
@@ -1061,11 +1062,11 @@
                 padding: 24px 28px 28px;
                 border-radius: 40px;
             }
+            .brand-icon {
+                font-size: 64px; /* Bigger on Tablet */
+            }
             .brand h1 {
                 font-size: 32px;
-            }
-            .brand-icon {
-                font-size: 42px;
             }
             .developer-link {
                 font-size: 14px;
@@ -1122,11 +1123,11 @@
                 padding: 32px 36px 36px;
                 border-radius: 48px;
             }
+            .brand-icon {
+                font-size: 80px; /* Even Bigger on Desktop */
+            }
             .brand h1 {
                 font-size: 38px;
-            }
-            .brand-icon {
-                font-size: 48px;
             }
             .result-box {
                 font-size: 13px;
@@ -1143,11 +1144,11 @@
                 padding: 8px 6px 10px;
                 border-radius: 16px;
             }
+            .brand-icon {
+                font-size: 44px; /* Still Big on Mobile */
+            }
             .brand h1 {
                 font-size: 18px;
-            }
-            .brand-icon {
-                font-size: 24px;
             }
             .developer-link {
                 font-size: 11px;
@@ -1331,7 +1332,7 @@
 
             <p class="loading-status" id="loadingStatus">Initializing…</p>
         </div>
-        <div class="intro-version">v2.6 · Centered Header</div>
+        <div class="intro-version">v2.6 · Big Logo</div>
     </div>
 
     <!-- ============================================================
@@ -1339,13 +1340,13 @@
     ============================================================ -->
     <div class="glass-container">
 
-        <!-- HEADER (Centered) -->
+        <!-- HEADER (Centered, Big Logo) -->
         <div class="header">
             <div class="brand">
                 <span class="brand-icon"><i class="fa-brands fa-d-and-d"></i></span>
                 <h1>BIZAPRO SKIN TOOL</h1>
                 <a href="https://t.me/Ryan_m_m_m" target="_blank" class="developer-link">
-                    <i class="fa-brands fa-telegram"></i> DEVELOPER BY @Ryan_m_m_m
+                    <i class="fa-brands fa-telegram"></i> DEVELOPER
                 </a>
             </div>
             <div class="status-badge">
@@ -1505,14 +1506,14 @@
             </div>
             <div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;align-items:center;">
                 <span style="color:rgba(255,255,255,0.12);font-size:10px;">BIZAPRO v2.6</span>
-                <span style="color:rgba(255,255,255,0.06);font-size:9px;">Centered</span>
+                <span style="color:rgba(255,255,255,0.06);font-size:9px;">Big Logo</span>
             </div>
         </div>
     </div>
 
     <script>
         // ================================================================
-        //  BIZAPRO · SKIN TOOL  –  v2.6  (Centered Header)
+        //  BIZAPRO · SKIN TOOL  –  v2.6  (Big Logo)
         //  + Auto-load Item.uasset, skin.txt, Item.uexp
         //  + Manual OPEN UEXP
         //  + Top Hex extraction (offset 22)
@@ -2425,7 +2426,7 @@
                 });
 
                 await autoLoadFiles();
-                console.log('BIZAPRO · SKIN TOOL  |  v2.6  Centered Header');
+                console.log('BIZAPRO · SKIN TOOL  |  v2.6  Big Logo');
             }
 
             // ============================================================
