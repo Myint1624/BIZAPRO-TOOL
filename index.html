@@ -363,28 +363,32 @@
             pointer-events: none;
         }
 
-        /* ---------- HEADER ---------- */
+        /* ---------- HEADER (Centered) ---------- */
         .header {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-            gap: 6px 10px;
+            justify-content: center;
+            margin-bottom: 12px;
+            gap: 4px;
             flex-shrink: 0;
+            width: 100%;
         }
 
         .brand {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 8px;
+            text-align: center;
+            gap: 2px;
         }
 
         .brand-icon {
-            font-size: 24px;
+            font-size: 34px;
             color: #fff;
             filter: drop-shadow(0 0 20px rgba(120, 180, 255, 0.3));
             animation: glowPulse 4s ease-in-out infinite;
+            margin-bottom: 2px;
         }
 
         @keyframes glowPulse {
@@ -398,7 +402,7 @@
         }
 
         .brand h1 {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 700;
             letter-spacing: -0.5px;
             background: linear-gradient(135deg, #f0f4ff, #b0caff);
@@ -406,19 +410,35 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-shadow: 0 0 40px rgba(100, 150, 255, 0.15);
+            margin: 0;
+            line-height: 1.2;
         }
 
-        .brand .sub {
-            font-size: 10px;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.35);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            background: rgba(255, 255, 255, 0.04);
-            padding: 2px 8px;
+        .developer-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(0, 136, 204, 0.15);
+            border: 1px solid rgba(0, 136, 204, 0.25);
+            padding: 4px 14px;
             border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            margin-left: 0;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            margin-top: 2px;
+        }
+
+        .developer-link i {
+            color: #0088cc;
+            font-size: 16px;
+        }
+
+        .developer-link:hover {
+            background: rgba(0, 136, 204, 0.3);
+            border-color: #0088cc;
+            transform: scale(1.02);
         }
 
         .status-badge {
@@ -426,7 +446,8 @@
             align-items: center;
             gap: 6px;
             color: rgba(255, 255, 255, 0.5);
-            font-size: 11px;
+            font-size: 12px;
+            justify-content: center;
             flex-shrink: 0;
         }
 
@@ -1041,14 +1062,14 @@
                 border-radius: 40px;
             }
             .brand h1 {
-                font-size: 28px;
-            }
-            .brand .sub {
-                font-size: 12px;
-                padding: 4px 12px;
+                font-size: 32px;
             }
             .brand-icon {
-                font-size: 32px;
+                font-size: 42px;
+            }
+            .developer-link {
+                font-size: 14px;
+                padding: 6px 18px;
             }
             .glass-btn {
                 padding: 10px 22px;
@@ -1102,7 +1123,10 @@
                 border-radius: 48px;
             }
             .brand h1 {
-                font-size: 34px;
+                font-size: 38px;
+            }
+            .brand-icon {
+                font-size: 48px;
             }
             .result-box {
                 font-size: 13px;
@@ -1120,14 +1144,21 @@
                 border-radius: 16px;
             }
             .brand h1 {
-                font-size: 16px;
-            }
-            .brand .sub {
-                font-size: 8px;
-                padding: 1px 6px;
+                font-size: 18px;
             }
             .brand-icon {
-                font-size: 18px;
+                font-size: 24px;
+            }
+            .developer-link {
+                font-size: 11px;
+                padding: 3px 10px;
+                gap: 4px;
+            }
+            .developer-link i {
+                font-size: 13px;
+            }
+            .status-badge {
+                font-size: 10px;
             }
             .actions {
                 gap: 4px;
@@ -1300,7 +1331,7 @@
 
             <p class="loading-status" id="loadingStatus">Initializing…</p>
         </div>
-        <div class="intro-version">v2.6 · No container scroll</div>
+        <div class="intro-version">v2.6 · Centered Header</div>
     </div>
 
     <!-- ============================================================
@@ -1308,12 +1339,14 @@
     ============================================================ -->
     <div class="glass-container">
 
-        <!-- HEADER -->
+        <!-- HEADER (Centered) -->
         <div class="header">
             <div class="brand">
                 <span class="brand-icon"><i class="fa-brands fa-d-and-d"></i></span>
                 <h1>BIZAPRO SKIN TOOL</h1>
-                <span class="sub">Finder</span>
+                <a href="https://t.me/Ryan_m_m_m" target="_blank" class="developer-link">
+                    <i class="fa-brands fa-telegram"></i> DEVELOPER BY @Ryan_m_m_m
+                </a>
             </div>
             <div class="status-badge">
                 <span class="status-dot"></span>
@@ -1472,14 +1505,14 @@
             </div>
             <div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;align-items:center;">
                 <span style="color:rgba(255,255,255,0.12);font-size:10px;">BIZAPRO v2.6</span>
-                <span style="color:rgba(255,255,255,0.06);font-size:9px;">No scroll</span>
+                <span style="color:rgba(255,255,255,0.06);font-size:9px;">Centered</span>
             </div>
         </div>
     </div>
 
     <script>
         // ================================================================
-        //  BIZAPRO · SKIN TOOL  –  v2.6  (no container scroll)
+        //  BIZAPRO · SKIN TOOL  –  v2.6  (Centered Header)
         //  + Auto-load Item.uasset, skin.txt, Item.uexp
         //  + Manual OPEN UEXP
         //  + Top Hex extraction (offset 22)
@@ -2392,7 +2425,7 @@
                 });
 
                 await autoLoadFiles();
-                console.log('BIZAPRO · SKIN TOOL  |  v2.6 ');
+                console.log('BIZAPRO · SKIN TOOL  |  v2.6  Centered Header');
             }
 
             // ============================================================
